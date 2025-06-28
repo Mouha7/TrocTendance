@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inscription - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-flame-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <img src="{% static 'images/logo.png' %}" alt="Logo TrocTendance" class="mx-auto h-12 object-cover flex items-center justify-center" />
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Créer un compte TrocTendance
+            </h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Ou
+                <a href="{% url 'accounts:login' %}" class="font-medium text-flame-600 hover:text-flame-500">
+                    connectez-vous à votre compte existant
+                </a>
+            </p>
+        </div>
+        
+        <form class="mt-8 space-y-6" method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-md">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name }}
+                    </div>
+                    <div>
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                
+                <div>
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                
+                <div>
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+                
+                <div>
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                </div>
+                
+                <div>
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit" class="btn-primary w-full py-3 text-lg">
+                    Créer mon compte
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

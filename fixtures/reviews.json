@@ -1,0 +1,302 @@
+[
+	{
+		"model": "orders.review",
+		"pk": 1,
+		"fields": {
+			"order": 1,
+			"reviewer": 3,
+			"reviewed_user": 5,
+			"rating": 5,
+			"title": "Excellent vendeur !",
+			"comment": "Transaction parfaite ! Thomas était très ponctuel au RDV, la chemise était exactement comme décrite. Je recommande vivement ce vendeur.",
+			"would_recommend": true,
+			"created_at": "2025-06-21T10:30:00Z",
+			"updated_at": "2025-06-21T10:30:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 2,
+		"fields": {
+			"order": 2,
+			"reviewer": 4,
+			"reviewed_user": 6,
+			"rating": 4,
+			"title": "Très bon contact",
+			"comment": "Livraison rapide et produit conforme. Le vendeur a été réactif à mes messages. Seul bémol : l'emballage était un peu léger.",
+			"would_recommend": true,
+			"created_at": "2025-06-13T14:15:00Z",
+			"updated_at": "2025-06-13T14:15:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 3,
+		"fields": {
+			"order": 3,
+			"reviewer": 7,
+			"reviewed_user": 8,
+			"rating": 3,
+			"title": "Produit correct mais délai long",
+			"comment": "Le jean est bien mais la livraison a pris plus de temps que prévu. Le vendeur aurait pu être plus transparent sur les délais.",
+			"would_recommend": false,
+			"created_at": "2025-06-20T16:45:00Z",
+			"updated_at": "2025-06-20T16:45:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 4,
+		"fields": {
+			"order": 4,
+			"reviewer": 2,
+			"reviewed_user": 9,
+			"rating": 5,
+			"title": "Parfait !",
+			"comment": "Le boubou est magnifique, encore plus beau qu'en photo. Fatou a été adorable et m'a même donné des conseils pour l'entretien. 10/10 !",
+			"would_recommend": true,
+			"created_at": "2025-06-22T11:20:00Z",
+			"updated_at": "2025-06-22T11:20:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 5,
+		"fields": {
+			"order": 5,
+			"reviewer": 5,
+			"reviewed_user": 3,
+			"rating": 2,
+			"title": "Déçu par l'état du produit",
+			"comment": "La veste avait plus de traces d'usure que décrit. Le vendeur a refusé tout remboursement. Je ne recommande pas.",
+			"would_recommend": false,
+			"created_at": "2025-06-18T09:10:00Z",
+			"updated_at": "2025-06-18T09:10:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 6,
+		"fields": {
+			"order": 6,
+			"reviewer": 8,
+			"reviewed_user": 4,
+			"rating": 5,
+			"title": "Service impeccable",
+			"comment": "Commande annulée mais le vendeur a été très professionnel et a tout remboursé rapidement. À recommander pour sa transparence.",
+			"would_recommend": true,
+			"created_at": "2025-06-08T13:30:00Z",
+			"updated_at": "2025-06-08T13:30:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 7,
+		"fields": {
+			"order": 7,
+			"reviewer": 6,
+			"reviewed_user": 7,
+			"rating": 4,
+			"title": "Bon achat",
+			"comment": "RDV respecté à la gare de Thiaroye. Les chaussures sont confortables et correspondent à la description. Petit bémol sur l'odeur de désinfection un peu forte.",
+			"would_recommend": true,
+			"created_at": "2025-06-15T19:45:00Z",
+			"updated_at": "2025-06-15T19:45:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 8,
+		"fields": {
+			"order": 8,
+			"reviewer": 9,
+			"reviewed_user": 2,
+			"rating": 5,
+			"title": "Vendeur sérieux",
+			"comment": "Livraison express à Grand Yoff ! Le costume est impeccable, bien emballé. Ali est un vendeur fiable que je recommande.",
+			"would_recommend": true,
+			"created_at": "2025-06-12T12:10:00Z",
+			"updated_at": "2025-06-12T12:10:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 9,
+		"fields": {
+			"order": 9,
+			"reviewer": 3,
+			"reviewed_user": 8,
+			"rating": 3,
+			"title": "Correct",
+			"comment": "Le t-shirt est bien mais la couleur est un peu passée. Le vendeur aurait pu le préciser. Livraison un peu chère pour le produit.",
+			"would_recommend": true,
+			"created_at": "2025-06-21T08:20:00Z",
+			"updated_at": "2025-06-21T08:20:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 10,
+		"fields": {
+			"order": 10,
+			"reviewer": 7,
+			"reviewed_user": 5,
+			"rating": 1,
+			"title": "Mauvaise expérience",
+			"comment": "Le vendeur n'est jamais venu au RDV et n'a pas répondu à mes messages. J'ai perdu mon temps.",
+			"would_recommend": false,
+			"created_at": "2025-06-23T15:00:00Z",
+			"updated_at": "2025-06-23T15:00:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 11,
+		"fields": {
+			"order": 11,
+			"reviewer": 4,
+			"reviewed_user": 6,
+			"rating": 5,
+			"title": "Exactement comme neuf !",
+			"comment": "La robe wax est superbe, on dirait qu'elle n'a jamais été portée. Échange très agréable avec Aïda au Sicap Liberté. Merci !",
+			"would_recommend": true,
+			"created_at": "2025-06-17T17:30:00Z",
+			"updated_at": "2025-06-17T17:30:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 12,
+		"fields": {
+			"order": 12,
+			"reviewer": 2,
+			"reviewed_user": 9,
+			"rating": 4,
+			"title": "Bonne affaire",
+			"comment": "Livraison un peu longue jusqu'à Diamniadio mais le produit vaut l'attente. Qualité prix imbattable pour ce costume.",
+			"would_recommend": true,
+			"created_at": "2025-06-14T10:45:00Z",
+			"updated_at": "2025-06-14T10:45:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 13,
+		"fields": {
+			"order": 13,
+			"reviewer": 5,
+			"reviewed_user": 3,
+			"rating": 5,
+			"title": "Flexibilité appréciée",
+			"comment": "J'ai dû annuler mais le vendeur a été très compréhensif. Il m'a même proposé d'autres articles qui pourraient m'intéresser. Professionnel !",
+			"would_recommend": true,
+			"created_at": "2025-06-19T11:15:00Z",
+			"updated_at": "2025-06-19T11:15:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 14,
+		"fields": {
+			"order": 14,
+			"reviewer": 8,
+			"reviewed_user": 4,
+			"rating": 5,
+			"title": "Vendeuse charmante",
+			"comment": "Mariama a été adorable, elle a même ajouté un petit cadeau surprise dans le colis. La jupe est parfaite pour le bureau.",
+			"would_recommend": true,
+			"created_at": "2025-06-22T09:30:00Z",
+			"updated_at": "2025-06-22T09:30:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 15,
+		"fields": {
+			"order": 15,
+			"reviewer": 6,
+			"reviewed_user": 7,
+			"rating": 2,
+			"title": "Déception",
+			"comment": "La veste sentait fort la cigarette et avait des taches non visibles sur les photos. Le vendeur a refusé de reprendre l'article.",
+			"would_recommend": false,
+			"created_at": "2025-06-23T14:20:00Z",
+			"updated_at": "2025-06-23T14:20:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 16,
+		"fields": {
+			"order": 16,
+			"reviewer": 9,
+			"reviewed_user": 2,
+			"rating": 5,
+			"title": "Parfait pour le mariage",
+			"comment": "Le chapeau panama était exactement ce qu'il me fallait pour le mariage de mon frère. RDV rapide au Sea Plaza, échange très pro.",
+			"would_recommend": true,
+			"created_at": "2025-06-16T18:00:00Z",
+			"updated_at": "2025-06-16T18:00:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 17,
+		"fields": {
+			"order": 17,
+			"reviewer": 3,
+			"reviewed_user": 8,
+			"rating": 4,
+			"title": "Bon produit",
+			"comment": "La veste en cuir est top mais légèrement plus usée que sur les photos. Malgré tout, bonne affaire pour le prix. Livraison rapide à Ngor.",
+			"would_recommend": true,
+			"created_at": "2025-06-20T13:45:00Z",
+			"updated_at": "2025-06-20T13:45:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 18,
+		"fields": {
+			"order": 18,
+			"reviewer": 7,
+			"reviewed_user": 5,
+			"rating": 5,
+			"title": "Pyjama parfait pour bébé",
+			"comment": "Le pyjama est doux comme décrit, parfait pour ma petite. Le vendeur a même ajouté une petite culotte en cadeau. Très touchant !",
+			"would_recommend": true,
+			"created_at": "2025-06-18T10:10:00Z",
+			"updated_at": "2025-06-18T10:10:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 19,
+		"fields": {
+			"order": 19,
+			"reviewer": 4,
+			"reviewed_user": 6,
+			"rating": 5,
+			"title": "Ceinture de qualité",
+			"comment": "Exactement ce que je cherchais. RDV rapide au marché Tilène. Le cuir est de bonne qualité et la boucle solide. Je recommande !",
+			"would_recommend": true,
+			"created_at": "2025-06-21T16:30:00Z",
+			"updated_at": "2025-06-21T16:30:00Z"
+		}
+	},
+	{
+		"model": "orders.review",
+		"pk": 20,
+		"fields": {
+			"order": 20,
+			"reviewer": 2,
+			"reviewed_user": 9,
+			"rating": 3,
+			"title": "Correct mais pas exceptionnel",
+			"comment": "Le produit est correct mais la communication avec le vendeur a été difficile. Il a mis du temps à répondre à mes messages.",
+			"would_recommend": false,
+			"created_at": "2025-06-17T12:40:00Z",
+			"updated_at": "2025-06-17T12:40:00Z"
+		}
+	}
+]

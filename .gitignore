@@ -1,0 +1,15 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+
+# Static files
+staticfiles/
+
+# Node modules
+node_modules/
+
+# IDE
+.vscode/
+.DS_Store

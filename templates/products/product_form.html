@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- En-tête -->
+        <div class="mb-8">
+            <nav class="flex mb-4" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="{% url 'products:index' %}" class="text-gray-700 hover:text-flame-600">Accueil</a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="{% url 'products:my_products' %}" class="text-gray-700 hover:text-flame-600 ml-1 md:ml-2">Mes annonces</a>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-gray-500 ml-1 md:ml-2">{{ title }}</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            
+            <h1 class="text-3xl font-bold text-gray-900">{{ title }}</h1>
+        </div>
+
+        <!-- Formulaire -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <form method="post" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- Informations du produit -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Informations générales</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Titre -->
+                        <div class="md:col-span-2">
+                            <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.title.label }}
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.title.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Prix -->
+                        <div>
+                            <label for="{{ form.price.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.price.label }}
+                            </label>
+                            {{ form.price }}
+                            {% if form.price.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.price.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Catégorie -->
+                        <div>
+                            <label for="{{ form.category.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.category.label }}
+                            </label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.category.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- État -->
+                        <div>
+                            <label for="{{ form.condition.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.condition.label }}
+                            </label>
+                            {{ form.condition }}
+                            {% if form.condition.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.condition.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Taille -->
+                        <div>
+                            <label for="{{ form.size.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.size.label }}
+                            </label>
+                            {{ form.size }}
+                            {% if form.size.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.size.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="md:col-span-2">
+                            <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.description.label }}
+                            </label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.description.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Images -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Images</h2>
+                    <p class="text-sm text-gray-600 mb-4">Ajoutez jusqu'à 3 images de votre produit. La première image sera utilisée comme image principale.</p>
+                    
+                    {{ formset.management_form }}
+                    
+                    <div id="formset-container" class="space-y-4">
+                        {% for form in formset %}
+                            <div class="image-form border border-gray-200 rounded-lg p-4">
+                                {% if form.instance.pk %}
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-medium text-gray-900">Image {{ forloop.counter }}</h3>
+                                        <div class="flex items-center space-x-2">
+                                            {% if form.instance.image %}
+                                                <img src="{{ form.instance.image.url }}" alt="Preview" class="w-16 h-16 object-cover rounded">
+                                            {% endif %}
+                                            {{ form.DELETE }}
+                                            {% if form.DELETE %}
+                                                <label for="{{ form.DELETE.id_for_label }}" class="text-sm text-red-600">Supprimer</label>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <h3 class="font-medium text-gray-900 mb-2">Nouvelle image</h3>
+                                {% endif %}
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Fichier image</label>
+                                        {{ form.image }}
+                                        {% if form.image.errors %}
+                                            <p class="mt-1 text-sm text-red-600">{{ form.image.errors.0 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                        {{ form.alt_text }}
+                                        {% if form.alt_text.errors %}
+                                            <p class="mt-1 text-sm text-red-600">{{ form.alt_text.errors.0 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="md:col-span-3">
+                                        <div class="flex items-center">
+                                            {{ form.is_primary }}
+                                            <label for="{{ form.is_primary.id_for_label }}" class="ml-2 text-sm font-medium text-gray-700">
+                                                {{ form.is_primary.label }}
+                                            </label>
+                                        </div>
+                                        {% if form.is_primary.errors %}
+                                            <p class="mt-1 text-sm text-red-600">{{ form.is_primary.errors.0 }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <!-- Champs cachés pour les formulaires existants -->
+                                {% if form.instance.pk %}
+                                    {{ form.id }}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Boutons d'action -->
+                <div class="flex justify-between pt-6">
+                    <a href="{% url 'products:my_products' %}" class="btn-secondary">
+                        Annuler
+                    </a>
+                    <button type="submit" class="btn-primary">
+                        {{ button_text }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

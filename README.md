@@ -1,0 +1,1 @@
+|floatformat:"0g"

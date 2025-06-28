@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Conversation avec {{ other_user.get_full_name|default:other_user.username }} - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- En-tête -->
+        <div class="mb-6">
+            <nav class="flex mb-4" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="{% url 'orders:inbox' %}" class="text-gray-700 hover:text-flame-600">Messages</a>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-gray-500 ml-1 md:ml-2">{{ other_user.get_full_name|default:other_user.username }}</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            
+            <!-- Informations sur la conversation -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        {% if other_user.avatar %}
+                            <img src="{{ other_user.avatar.url }}" 
+                                 alt="{{ other_user.get_full_name }}"
+                                 class="w-12 h-12 rounded-full object-cover mr-4">
+                        {% else %}
+                            <div class="w-12 h-12 rounded-full bg-flame-200 flex items-center justify-center mr-4">
+                                <span class="text-lg font-bold text-flame-600">
+                                    {{ other_user.first_name.0|default:other_user.username.0|upper }}
+                                    {{ other_user.last_name.0|default:''|upper }}
+                                </span>
+                            </div>
+                        {% endif %}
+                        
+                        <div>
+                            <h1 class="text-xl font-bold text-gray-900">
+                                {{ other_user.get_full_name|default:other_user.username }}
+                            </h1>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <span class="text-flame-500 font-medium">{{ other_user.seller_rating }}</span>
+                                <span class="text-flame-400 ml-1">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit concerné -->
+                    <div class="text-right">
+                        <a href="{% url 'products:detail' conversation.product.pk %}" 
+                           class="text-flame-600 hover:text-flame-800 font-medium">
+                            {{ conversation.product.title }}
+                        </a>
+                        <div class="text-lg font-bold text-gray-900">{{ conversation.product.price|floatformat:"0g" }}FCFA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="bg-white rounded-lg shadow-lg mb-6">
+            <div class="p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Conversation</h2>
+                
+                <div class="space-y-4 max-h-96 overflow-y-auto">
+                    {% for message in messages %}
+                        <div class="flex {% if message.sender == user %}justify-end{% else %}justify-start{% endif %}">
+                            <div class="max-w-xs lg:max-w-md">
+                                <div class="{% if message.sender == user %}bg-flame-600 text-white{% else %}bg-gray-100 text-gray-900{% endif %} rounded-lg px-4 py-2">
+                                    {% if message.subject and forloop.first %}
+                                        <div class="font-semibold text-sm mb-1 opacity-90">
+                                            {{ message.subject }}
+                                        </div>
+                                    {% endif %}
+                                    <p class="text-sm">{{ message.content|linebreaks }}</p>
+                                </div>
+                                <div class="text-xs text-gray-500 mt-1 {% if message.sender == user %}text-right{% endif %}">
+                                    {{ message.created_at|date:"d M Y à H:i" }}
+                                    {% if message.sender == user and message.is_read %}
+                                        <span class="text-flame-600">✓ Lu</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="text-center text-gray-500 py-8">
+                            <div class="text-4xl mb-2">💬</div>
+                            <p>Aucun message dans cette conversation</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire de réponse -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Répondre</h3>
+            
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                
+                <div>
+                    <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ form.content.label }}
+                    </label>
+                    {{ form.content }}
+                    {% if form.content.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.content.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                
+                <div class="flex justify-between">
+                    <a href="{% url 'orders:inbox' %}" class="btn-secondary">
+                        Retour aux messages
+                    </a>
+                    <button type="submit" class="btn-primary">
+                        Envoyer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

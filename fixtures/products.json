@@ -1,0 +1,339 @@
+[
+	{
+		"model": "products.product",
+		"pk": 1,
+		"fields": {
+			"title": "Robe traditionnelle wax bleu et or",
+			"description": "Magnifique robe en wax de qualité, portée seulement 2 fois pour une cérémonie. Taille 38, parfaite pour les événements spéciaux. Motif unique et tissu respirant.",
+			"price": "25000",
+			"size": "M",
+			"category": 1,
+			"condition": "like_new",
+			"status": "available",
+			"seller": 3,
+			"slug": "robe-traditionnelle-wax-bleu-et-or",
+			"created_at": "2025-05-15T09:30:00Z",
+			"updated_at": "2025-05-15T09:30:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 2,
+		"fields": {
+			"title": "Jean slim homme Diesel",
+			"description": "Jean Diesel taille 32/34, excellent état. Coupe slim, couleur bleu délavé. Porté moins de 10 fois. Pas de déchirure ni d'usure visible.",
+			"price": "18000",
+			"size": "L",
+			"category": 11,
+			"condition": "good",
+			"status": "available",
+			"seller": 5,
+			"slug": "jean-slim-homme-diesel",
+			"created_at": "2025-05-16T14:20:00Z",
+			"updated_at": "2025-05-16T14:20:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 3,
+		"fields": {
+			"title": "Ensemble complet boubou homme",
+			"description": "Complet boubou de grande qualité avec broderies traditionnelles. Taille XL, idéal pour les cérémonies. Inclus pantalon assorti. Lavé une seule fois.",
+			"price": "35000",
+			"size": "XL",
+			"category": 2,
+			"condition": "like_new",
+			"status": "available",
+			"seller": 4,
+			"slug": "ensemble-complet-boubou-homme",
+			"created_at": "2025-05-17T11:15:00Z",
+			"updated_at": "2025-05-17T11:15:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 4,
+		"fields": {
+			"title": "Chaussures baskets Adidas Originals",
+			"description": "Baskets Adidas modèle Superstar, taille 42. Quelques marques d'usure normales sur la semelle mais encore très confortables. Parfaites pour le quotidien.",
+			"price": "22000",
+			"size": "42",
+			"category": 4,
+			"condition": "good",
+			"status": "available",
+			"seller": 6,
+			"slug": "chaussures-baskets-adidas-originals",
+			"created_at": "2025-05-18T16:40:00Z",
+			"updated_at": "2025-05-18T16:40:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 5,
+		"fields": {
+			"title": "Sac à main cuir véritable",
+			"description": "Sac à main en cuir marron, marque locale de qualité. Quelques légères traces d'usure mais structure solide. Compartiments spacieux.",
+			"price": "15000",
+			"category": 5,
+			"condition": "fair",
+			"status": "available",
+			"seller": 7,
+			"slug": "sac-a-main-cuir-veritable",
+			"created_at": "2025-05-19T10:10:00Z",
+			"updated_at": "2025-05-19T10:10:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 6,
+		"fields": {
+			"title": "Veste en jean femme Zara",
+			"description": "Veste en jean taille M, style décontracté. Poches fonctionnelles, couleur bleu moyen. Parfaite pour les soirées fraîches.",
+			"price": "12000",
+			"size": "M",
+			"category": 1,
+			"condition": "good",
+			"status": "available",
+			"seller": 8,
+			"slug": "veste-en-jean-femme-zara",
+			"created_at": "2025-05-20T13:25:00Z",
+			"updated_at": "2025-05-20T13:25:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 7,
+		"fields": {
+			"title": "Costume trois pièces homme",
+			"description": "Costume élégant couleur anthracite, taille 40. Veste, pantalon et gilet. Porté seulement pour un mariage. Pressing récent.",
+			"price": "45000",
+			"size": "L",
+			"category": 13,
+			"condition": "like_new",
+			"status": "available",
+			"seller": 9,
+			"slug": "costume-trois-pieces-homme",
+			"created_at": "2025-05-21T15:30:00Z",
+			"updated_at": "2025-05-21T15:30:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 8,
+		"fields": {
+			"title": "Robe de soirée longue rouge",
+			"description": "Robe de soirée taille 36, couleur rouge vif. Dos nu avec noeud décoratif. Portée une seule fois pour un gala. Très élégante.",
+			"price": "30000",
+			"size": "S",
+			"category": 1,
+			"condition": "like_new",
+			"status": "available",
+			"seller": 3,
+			"slug": "robe-de-soiree-longue-rouge",
+			"created_at": "2025-05-22T12:45:00Z",
+			"updated_at": "2025-05-22T12:45:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 9,
+		"fields": {
+			"title": "T-shirt col V Nike",
+			"description": "T-shirt sportif Nike taille L, couleur noire. Matière respirante, idéal pour le sport. Quelques petits frottements mais en bon état général.",
+			"price": "8000",
+			"size": "L",
+			"category": 8,
+			"condition": "good",
+			"status": "available",
+			"seller": 5,
+			"slug": "t-shirt-col-v-nike",
+			"created_at": "2025-05-23T17:10:00Z",
+			"updated_at": "2025-05-23T17:10:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 10,
+		"fields": {
+			"title": "Sandales cuir homme",
+			"description": "Sandales en cuir véritable marron, taille 43. Semelle confortable, parfaites pour l'été. Quelques traces d'usure mais encore plusieurs saisons devant elles.",
+			"price": "15000",
+			"size": "43",
+			"category": 4,
+			"condition": "fair",
+			"status": "available",
+			"seller": 4,
+			"slug": "sandales-cuir-homme",
+			"created_at": "2025-05-24T11:20:00Z",
+			"updated_at": "2025-05-24T11:20:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 11,
+		"fields": {
+			"title": "Pantalon de costume noir",
+			"description": "Pantalon de costume élégant, taille 38. Coupe droite, couleur noir profond. Pressing récent, état impeccable.",
+			"price": "12000",
+			"size": "M",
+			"category": 13,
+			"condition": "like_new",
+			"status": "available",
+			"seller": 6,
+			"slug": "pantalon-de-costume-noir",
+			"created_at": "2025-05-25T14:35:00Z",
+			"updated_at": "2025-05-25T14:35:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 12,
+		"fields": {
+			"title": "Ensemble bébé fille 6 mois",
+			"description": "Joli ensemble pour bébé fille - body, jupe et bandeau. Tissu doux et lavé plusieurs fois donc très confortable. Motif fleuri.",
+			"price": "5000",
+			"size": "B",
+			"category": 3,
+			"condition": "good",
+			"status": "available",
+			"seller": 7,
+			"slug": "ensemble-bebe-fille-6-mois",
+			"created_at": "2025-05-26T10:50:00Z",
+			"updated_at": "2025-05-26T10:50:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 13,
+		"fields": {
+			"title": "Chemise homme en lin",
+			"description": "Chemise légère en lin, taille L. Couleur beige, parfaite pour les chaleurs. Quelques petits plis mais état général très correct.",
+			"price": "10000",
+			"size": "L",
+			"category": 2,
+			"condition": "good",
+			"status": "available",
+			"seller": 8,
+			"slug": "chemise-homme-en-lin",
+			"created_at": "2025-05-27T13:15:00Z",
+			"updated_at": "2025-05-27T13:15:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 14,
+		"fields": {
+			"title": "Maillot de bain une pièce",
+			"description": "Maillot de bain taille 40, couleur bleu marine avec motifs floraux. Doublure intégrée, bon maintien. Porté seulement 3 fois.",
+			"price": "8000",
+			"size": "M",
+			"category": 9,
+			"condition": "like_new",
+			"status": "available",
+			"seller": 9,
+			"slug": "maillot-de-bain-une-piece",
+			"created_at": "2025-05-28T16:30:00Z",
+			"updated_at": "2025-05-28T16:30:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 15,
+		"fields": {
+			"title": "Veste en cuir vintage",
+			"description": "Veste en cuir véritable, style années 80. Taille 42. Quelques marques d'usure qui lui donnent du caractère. Doublure intérieure en bon état.",
+			"price": "40000",
+			"size": "XL",
+			"category": 6,
+			"condition": "fair",
+			"status": "available",
+			"seller": 3,
+			"slug": "veste-en-cuir-vintage",
+			"created_at": "2025-05-29T12:00:00Z",
+			"updated_at": "2025-05-29T12:00:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 16,
+		"fields": {
+			"title": "Jupe crayon Zara",
+			"description": "Jupe crayon taille 38, couleur noire. Coupe élégante pour le bureau. Élastique à la taille pour plus de confort.",
+			"price": "9000",
+			"size": "M",
+			"category": 1,
+			"condition": "good",
+			"status": "available",
+			"seller": 5,
+			"slug": "jupe-crayon-zara",
+			"created_at": "2025-05-30T14:20:00Z",
+			"updated_at": "2025-05-30T14:20:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 17,
+		"fields": {
+			"title": "Pull en laine mérinos",
+			"description": "Pull chaud en laine mérinos, taille L. Couleur gris anthracite. Parfait pour les soirées fraîches. Lavé selon instructions.",
+			"price": "15000",
+			"size": "L",
+			"category": 14,
+			"condition": "good",
+			"status": "available",
+			"seller": 4,
+			"slug": "pull-en-laine-merinos",
+			"created_at": "2025-05-31T10:40:00Z",
+			"updated_at": "2025-05-31T10:40:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 18,
+		"fields": {
+			"title": "Chapeau Panama homme",
+			"description": "Authentique chapeau Panama, taille 58. Tressage serré, bord moyen. Protection solaire idéale. Quelques légères traces d'utilisation.",
+			"price": "18000",
+			"category": 5,
+			"condition": "good",
+			"status": "available",
+			"seller": 6,
+			"slug": "chapeau-panama-homme",
+			"created_at": "2025-06-01T13:00:00Z",
+			"updated_at": "2025-06-01T13:00:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 19,
+		"fields": {
+			"title": "Ensemble pyjama coton bébé",
+			"description": "Pyjama 100% coton pour bébé 12 mois. Motif animaux, fermeture pressions pour faciliter les changes. Lavé plusieurs fois, très doux.",
+			"price": "4000",
+			"size": "B",
+			"category": 3,
+			"condition": "good",
+			"status": "available",
+			"seller": 7,
+			"slug": "ensemble-pyjama-coton-bebe",
+			"created_at": "2025-06-02T16:15:00Z",
+			"updated_at": "2025-06-02T16:15:00Z"
+		}
+	},
+	{
+		"model": "products.product",
+		"pk": 20,
+		"fields": {
+			"title": "Ceinture cuir homme",
+			"description": "Ceinture en cuir véritable marron, taille 95 cm. Boucle métallique argentée. Quelques marques d'usure mais encore plusieurs années d'utilisation possible.",
+			"price": "7000",
+			"category": 5,
+			"condition": "fair",
+			"status": "available",
+			"seller": 8,
+			"slug": "ceinture-cuir-homme",
+			"created_at": "2025-06-03T11:30:00Z",
+			"updated_at": "2025-06-03T11:30:00Z"
+		}
+	}
+]

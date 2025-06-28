@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Accueil - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-flame-500 to-flame-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo TrocTendance" class="inline-block h-12 mb-2">
+                    Bienvenue sur TrocTendance
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-flame-100">
+                    Votre marketplace de seconde main de confiance
+                </p>
+                <div class="flex justify-center space-x-8 text-flame-100">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">{{ total_products }}</div>
+                        <div class="text-sm">Produits disponibles</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">{{ total_categories }}</div>
+                        <div class="text-sm">Catégories</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">5★</div>
+                        <div class="text-sm">Note moyenne</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtres et Recherche -->
+    <div class="bg-white shadow-sm border-b border-flame-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <form method="GET" class="space-y-4">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <!-- Barre de recherche -->
+                    <div class="flex-1">
+                        <div class="relative">
+                            <input type="text" 
+                                    name="search" 
+                                    value="{{ search_query }}" 
+                                    placeholder="Rechercher un produit, une catégorie..."
+                                    class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-flame-500 focus:border-flame-500">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtre par catégorie -->
+                    <div class="md:w-48">
+                        <select name="category" class="w-full py-3 px-4 border border-gray-300 rounded-lg focus:ring-flame-500 focus:border-flame-500">
+                            <option value="">Toutes les catégories</option>
+                            {% for category in categories %}
+                                <option 
+                                value="{{ category.id }}" 
+                                {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}
+                                >
+                                    {{ category.icon }} {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <!-- Tri -->
+                    <div class="md:w-48">
+                        <select name="sort" class="w-full py-3 px-4 border border-gray-300 rounded-lg focus:ring-flame-500 focus:border-flame-500">
+                            {% for sort_value, sort_label in sort_options %}
+                                <option value="{{ sort_value }}" {% if current_sort == sort_value %}selected{% endif %}>
+                                    {{ sort_label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Tri Taille -->
+                    <div class="md:w-48">
+                        <select name="size" class="w-full py-3 px-4 border border-gray-300 rounded-lg focus:ring-flame-500 focus:border-flame-500">
+                            {% for sort_value, sort_label in sort_options_size %}
+                                <option value="{{ sort_value }}" {% if current_sort_size == sort_value %}selected{% endif %}>
+                                    {{ sort_label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <!-- Bouton de recherche -->
+                    <button type="submit" class="btn-primary px-8 py-3 whitespace-nowrap">
+                        Rechercher
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Résultats -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Informations sur les résultats -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">
+                {% if search_query %}
+                    Résultats pour "{{ search_query }}"
+                {% elif selected_category %}
+                    {% for category in categories %}
+                        {% if category.id|stringformat:"s" == selected_category %}
+                            {{ category.icon }} {{ category.name }}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    Tous les produits
+                {% endif %}
+            </h2>
+            <p class="text-gray-600">
+                {{ page_obj.paginator.count }} produit{{ page_obj.paginator.count|pluralize }} trouvé{{ page_obj.paginator.count|pluralize }}
+            </p>
+        </div>
+
+        {% if products %}
+            <!-- Grille des produits -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {% for product in products %}
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                        <!-- Image du produit -->
+                        <div class="relative">
+                            <a href="{% url 'products:detail' product.pk %}">
+                                {% if product.images.first %}
+                                    <img src="{{ product.images.first.image.url }}" 
+                                         alt="{{ product.images.first.alt_text|default:product.title }}"
+                                         class="w-full h-48 object-cover">
+                                {% else %}
+                                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                        <span class="text-4xl">{{ product.category.icon|default:"📦" }}</span>
+                                    </div>
+                                {% endif %}
+                            </a>
+                            
+                            <!-- Badge de condition -->
+                            <div class="absolute top-2 left-2">
+                                <span class="px-2 py-1 text-xs font-medium rounded-full
+                                    {% if product.condition == 'new' %}bg-green-100 text-green-800
+                                    {% elif product.condition == 'like_new' %}bg-blue-100 text-blue-800
+                                    {% elif product.condition == 'good' %}bg-yellow-100 text-yellow-800
+                                    {% elif product.condition == 'fair' %}bg-orange-100 text-orange-800
+                                    {% else %}bg-red-100 text-red-800{% endif %}">
+                                    {{ product.get_condition_display }}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Informations du produit -->
+                        <div class="p-4">
+                            <div class="flex items-start justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">
+                                    <a href="{% url 'products:detail' product.pk %}" class="hover:text-flame-600">
+                                        {{ product.title }}
+                                    </a>
+                                </h3>
+                                <span class="text-xl font-bold text-flame-600 ml-2">
+                                    {{ product.price|floatformat:"0g" }}FCFA
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">
+                                {{ product.description|truncatewords:15 }}
+                            </p>
+                            
+                            <!-- Informations vendeur -->
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    {% if product.seller.avatar %}
+                                        <img src="{{ product.seller.avatar.url }}" 
+                                            alt="{{ product.seller.get_full_name }}"
+                                            class="w-6 h-6 rounded-full mr-2">
+                                    {% else %}
+                                        <div class="w-6 h-6 rounded-full bg-flame-200 flex items-center justify-center mr-2">
+                                            <span class="text-xs font-bold text-flame-600">
+                                                {{ product.seller.first_name.0|default:product.seller.username.0|upper }}
+                                            </span>
+                                        </div>
+                                    {% endif %}
+                                    <span>{{ product.seller.get_full_name|default:product.seller.username }}</span>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <span class="text-flame-500">{{ product.seller.seller_rating }}</span>
+                                    <span class="text-flame-400 ml-1">⭐</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Catégorie et date -->
+                            <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+                                <span class="text-xs text-gray-500">
+                                    {{ product.category.icon }} {{ product.category.name }}
+                                </span>
+                                <span class="text-xs text-gray-500">
+                                    {{ product.created_at|date:"d M Y" }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination stylée TrocTendance -->
+            {% if page_obj.has_other_pages %}
+                <div class="mt-12 flex justify-center">
+                    <nav class="flex space-x-2" aria-label="Pagination">
+                        {% if page_obj.has_previous %}
+                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if current_sort %}sort={{ current_sort }}&{% endif %}page={{ page_obj.previous_page_number }}"
+                               class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-flame-50 transition-colors duration-200">
+                                Précédent
+                            </a>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <span class="px-3 py-2 text-sm font-bold text-white bg-flame-600 border border-flame-600 rounded-md shadow">
+                                    {{ num }}
+                                </span>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if current_sort %}sort={{ current_sort }}&{% endif %}page={{ num }}"
+                                   class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-flame-100 transition-colors duration-200">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if current_sort %}sort={{ current_sort }}&{% endif %}page={{ page_obj.next_page_number }}"
+                               class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-flame-50 transition-colors duration-200">
+                                Suivant
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            {% endif %}
+        {% else %}
+            <!-- Aucun produit trouvé -->
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucun produit trouvé</h3>
+                <p class="text-gray-600 mb-6">
+                    {% if search_query %}
+                        Essayez avec d'autres mots-clés ou supprimez les filtres.
+                    {% else %}
+                        Il n'y a pas encore de produits dans cette catégorie.
+                    {% endif %}
+                </p>
+                <a href="{% url 'products:index' %}" class="btn-primary">
+                    Voir tous les produits
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

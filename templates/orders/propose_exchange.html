@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Proposer un échange pour : <strong>{{ product.title }}</strong></h2>
+    <p>Choisissez un de vos produits à proposer en échange :</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="product_id">Mon produit à échanger :</label>
+            <select name="product_id" id="product_id" class="form-control" required>
+                <option value="">-- Sélectionnez votre produit --</option>
+                {% for my_product in my_products %}
+                    <option value="{{ my_product.id }}">
+                        {{ my_product.title }}{% if my_product.price %} ({{ my_product.price|floatformat:"0g" }}FCFA){% endif %}
+                    </option>
+                {% empty %}
+                    <option disabled>Aucun produit disponible pour l'échange.</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Envoyer la proposition</button>
+        <a href="{% url 'products:detail' product.pk %}" class="btn btn-secondary mt-3">Annuler</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,254 @@
+[
+	{
+		"model": "products.productimage",
+		"pk": 1,
+		"fields": {
+			"product": 1,
+			"image": "products/robe_wax_bleu_1.jpeg",
+			"alt_text": "Robe wax bleu et or - vue de face",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-15T09:35:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 2,
+		"fields": {
+			"product": 1,
+			"image": "products/robe_wax_bleu_2.jpeg",
+			"alt_text": "Robe wax bleu et or - vue de dos",
+			"is_primary": false,
+			"order": 2,
+			"created_at": "2025-05-15T09:36:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 3,
+		"fields": {
+			"product": 2,
+			"image": "products/jean_diesel_1.jpeg",
+			"alt_text": "Jean Diesel - vue avant",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-16T14:25:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 4,
+		"fields": {
+			"product": 3,
+			"image": "products/boubou_homme_1.jpeg",
+			"alt_text": "Boubou homme - vue complète",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-17T11:20:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 5,
+		"fields": {
+			"product": 4,
+			"image": "products/adidas_superstar_1.jpeg",
+			"alt_text": "Baskets Adidas Superstar - vue de côté",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-18T16:45:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 6,
+		"fields": {
+			"product": 5,
+			"image": "products/sac_cuir_1.jpeg",
+			"alt_text": "Sac à main cuir - vue fermée",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-19T10:15:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 7,
+		"fields": {
+			"product": 6,
+			"image": "products/veste_jean_1.jpeg",
+			"alt_text": "Veste jean Zara - vue avant",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-20T13:30:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 8,
+		"fields": {
+			"product": 7,
+			"image": "products/costume_3pieces_1.jpeg",
+			"alt_text": "Costume trois pièces - complet",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-21T15:35:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 9,
+		"fields": {
+			"product": 8,
+			"image": "products/robe_soiree_rouge_1.jpeg",
+			"alt_text": "Robe de soirée rouge - vue de face",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-22T12:50:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 10,
+		"fields": {
+			"product": 9,
+			"image": "products/tshirt_nike_1.jpeg",
+			"alt_text": "T-shirt Nike - vue avant",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-23T17:15:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 11,
+		"fields": {
+			"product": 10,
+			"image": "products/sandales_cuir_1.jpeg",
+			"alt_text": "Sandales cuir - vue de dessus",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-24T11:25:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 12,
+		"fields": {
+			"product": 11,
+			"image": "products/pantalon_costume_1.jpeg",
+			"alt_text": "Pantalon costume noir - vue avant",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-25T14:40:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 13,
+		"fields": {
+			"product": 12,
+			"image": "products/ensemble_bebe_1.jpeg",
+			"alt_text": "Ensemble bébé fille - complet",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-26T10:55:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 14,
+		"fields": {
+			"product": 13,
+			"image": "products/chemise_lin_1.jpeg",
+			"alt_text": "Chemise en lin - vue portée",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-27T13:20:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 15,
+		"fields": {
+			"product": 14,
+			"image": "products/maillot_bain_1.jpeg",
+			"alt_text": "Maillot de bain une pièce - vue avant",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-28T16:35:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 16,
+		"fields": {
+			"product": 15,
+			"image": "products/veste_cuir_1.jpeg",
+			"alt_text": "Veste en cuir vintage - vue ouverte",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-29T12:05:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 17,
+		"fields": {
+			"product": 16,
+			"image": "products/jupe_crayon_1.jpeg",
+			"alt_text": "Jupe crayon noire - vue de côté",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-30T14:25:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 18,
+		"fields": {
+			"product": 17,
+			"image": "products/pull_laine_1.jpeg",
+			"alt_text": "Pull laine mérinos - vue avant",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-05-31T10:45:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 19,
+		"fields": {
+			"product": 18,
+			"image": "products/chapeau_panama_1.jpeg",
+			"alt_text": "Chapeau Panama - vue de dessus",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-06-01T13:05:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 20,
+		"fields": {
+			"product": 19,
+			"image": "products/pyjama_bebe_1.jpeg",
+			"alt_text": "Pyjama bébé - vue complète",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-06-02T16:20:00Z"
+		}
+	},
+	{
+		"model": "products.productimage",
+		"pk": 21,
+		"fields": {
+			"product": 20,
+			"image": "products/ceinture_cuir_1.jpeg",
+			"alt_text": "Ceinture cuir - vue détaillée",
+			"is_primary": true,
+			"order": 1,
+			"created_at": "2025-06-03T11:35:00Z"
+		}
+	}
+]

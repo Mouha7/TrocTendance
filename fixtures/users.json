@@ -1,0 +1,362 @@
+[
+    {
+        "model": "accounts.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "email": "admin@troctendance.com",
+            "first_name": "Admin",
+            "last_name": "troctendance",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=", 
+            "is_staff": true,
+            "is_superuser": true,
+            "is_active": true,
+            "phone": "+221 77 123 45 67",
+            "address": "Plateau, Dakar, Sénégal",
+            "size": "M",
+            "date_joined": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 2,
+        "fields": {
+            "username": "fatou_diouf",
+            "email": "fatou.diouf@gmail.com",
+            "first_name": "Fatou",
+            "last_name": "Diouf",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 76 543 21 09",
+            "address": "HLM 5, Dakar",
+            "size": "S",
+            "date_joined": "2025-01-15T14:30:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 3,
+        "fields": {
+            "username": "alioune_sow",
+            "email": "alioune.sow@hotmail.com",
+            "first_name": "Alioune",
+            "last_name": "Sow",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 77 890 12 34",
+            "address": "Grand Yoff, Dakar",
+            "size": "L",
+            "date_joined": "2025-01-20T11:15:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 4,
+        "fields": {
+            "username": "amina_ndiaye",
+            "email": "amina.n@gmail.com",
+            "first_name": "Amina",
+            "last_name": "Ndiaye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 78 456 78 90",
+            "address": "Sicap Liberté, Dakar",
+            "size": "M",
+            "date_joined": "2025-02-05T09:45:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 5,
+        "fields": {
+            "username": "papa_gueye",
+            "email": "papa.gueye@yahoo.fr",
+            "first_name": "Papa",
+            "last_name": "Gueye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 76 123 45 67",
+            "address": "Parcelles Assainies, Dakar",
+            "size": "XL",
+            "date_joined": "2025-02-10T16:20:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 6,
+        "fields": {
+            "username": "mariama_fall",
+            "email": "mariama.fall@outlook.com",
+            "first_name": "Mariama",
+            "last_name": "Fall",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 77 654 32 10",
+            "address": "Mermoz, Dakar",
+            "size": "S",
+            "date_joined": "2025-02-18T13:10:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 7,
+        "fields": {
+            "username": "modou_diallo",
+            "email": "modou.diallo@gmail.com",
+            "first_name": "Modou",
+            "last_name": "Diallo",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 76 789 01 23",
+            "address": "Ouakam, Dakar",
+            "size": "L",
+            "date_joined": "2025-03-01T10:30:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 8,
+        "fields": {
+            "username": "astou_sene",
+            "email": "astou.sene@hotmail.com",
+            "first_name": "Astou",
+            "last_name": "Sene",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 77 234 56 78",
+            "address": "Fann, Dakar",
+            "size": "M",
+            "date_joined": "2025-03-05T15:45:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 9,
+        "fields": {
+            "username": "ibrahima_ndiaye",
+            "email": "ibrahima.n@gmail.com",
+            "first_name": "Ibrahima",
+            "last_name": "Ndiaye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 78 901 23 45",
+            "address": "Almadies, Dakar",
+            "size": "XL",
+            "date_joined": "2025-03-12T08:20:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 10,
+        "fields": {
+            "username": "khadija_diop",
+            "email": "khadija.diop@yahoo.fr",
+            "first_name": "Khadija",
+            "last_name": "Diop",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 76 345 67 89",
+            "address": "Gueule Tapée, Dakar",
+            "size": "XS",
+            "date_joined": "2025-03-20T12:15:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 11,
+        "fields": {
+            "username": "cheikh_tall",
+            "email": "cheikh.tall@outlook.com",
+            "first_name": "Cheikh",
+            "last_name": "Tall",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 77 456 78 90",
+            "address": "Thiaroye, Dakar",
+            "size": "M",
+            "date_joined": "2025-04-02T14:50:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 12,
+        "fields": {
+            "username": "sokhna_ndoye",
+            "email": "sokhna.ndoye@gmail.com",
+            "first_name": "Sokhna",
+            "last_name": "Ndoye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 78 012 34 56",
+            "address": "Point E, Dakar",
+            "size": "S",
+            "date_joined": "2025-04-10T09:30:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 13,
+        "fields": {
+            "username": "moussa_ndiaye",
+            "email": "moussa.n@hotmail.com",
+            "first_name": "Moussa",
+            "last_name": "Ndiaye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 76 678 90 12",
+            "address": "Diamniadio",
+            "size": "L",
+            "date_joined": "2025-04-15T17:25:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 14,
+        "fields": {
+            "username": "aissatou_fall",
+            "email": "aissatou.fall@yahoo.fr",
+            "first_name": "Aissatou",
+            "last_name": "Fall",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 77 789 01 23",
+            "address": "Keur Massar, Dakar",
+            "size": "M",
+            "date_joined": "2025-04-22T11:40:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 15,
+        "fields": {
+            "username": "malick_sarr",
+            "email": "malick.sarr@gmail.com",
+            "first_name": "Malick",
+            "last_name": "Sarr",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 76 901 23 45",
+            "address": "Rufisque",
+            "size": "XL",
+            "date_joined": "2025-05-05T10:15:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 16,
+        "fields": {
+            "username": "ndeye_diop",
+            "email": "ndeye.diop@outlook.com",
+            "first_name": "Ndeye",
+            "last_name": "Diop",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 77 012 34 56",
+            "address": "Sacre Coeur, Dakar",
+            "size": "S",
+            "date_joined": "2025-05-12T14:20:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 17,
+        "fields": {
+            "username": "ousmane_ndiaye",
+            "email": "ousmane.n@hotmail.com",
+            "first_name": "Ousmane",
+            "last_name": "Ndiaye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 78 123 45 67",
+            "address": "Yoff, Dakar",
+            "size": "M",
+            "date_joined": "2025-05-18T16:30:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 18,
+        "fields": {
+            "username": "amina_sy",
+            "email": "amina.sy@yahoo.fr",
+            "first_name": "Amina",
+            "last_name": "Sy",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 76 234 56 78",
+            "address": "Medina, Dakar",
+            "size": "XS",
+            "date_joined": "2025-05-25T13:45:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 19,
+        "fields": {
+            "username": "pape_ndiaye",
+            "email": "pape.ndiaye@gmail.com",
+            "first_name": "Pape",
+            "last_name": "Ndiaye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 77 345 67 89",
+            "address": "Grand Dakar",
+            "size": "L",
+            "date_joined": "2025-06-01T09:10:00Z"
+        }
+    },
+    {
+        "model": "accounts.user",
+        "pk": 20,
+        "fields": {
+            "username": "sokhna_ndiaye",
+            "email": "sokhna.n@hotmail.com",
+            "first_name": "Sokhna",
+            "last_name": "Ndiaye",
+            "password": "pbkdf2_sha256$1000000$CSlhZLZUJ4ka4PjTqLgtNN$4IrJcoHSD9jkXYNNlLXyLs5MPFTOuuy2Eh8iwzefwDs=",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "phone": "+221 78 456 78 90",
+            "address": "Keur Mbaye Fall, Dakar",
+            "size": "M",
+            "date_joined": "2025-06-10T15:20:00Z"
+        }
+    }
+]

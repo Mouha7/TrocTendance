@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Supprimer {{ product.title }} - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50 py-8">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex items-center mb-6">
+                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Supprimer le produit</h1>
+                    <p class="text-gray-600">Cette action est irréversible</p>
+                </div>
+            </div>
+
+            <!-- Aperçu du produit -->
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <div class="flex items-center">
+                    {% if product.images.first and product.images.first.image %}
+                        <img src="{{ product.images.first.image.url }}" 
+                             alt="{{ product.images.first.alt_text|default:product.title }}"
+                             class="w-16 h-16 object-cover rounded-lg mr-4">
+                    {% else %}
+                        <div class="w-16 h-16 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center rounded-lg mr-4">
+                            <span class="text-2xl">{{ product.category.icon|default:"📦" }}</span>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900">{{ product.title }}</h3>
+                        <p class="text-sm text-gray-600">{{ product.category.name }} • {{ product.price|floatformat:"0g" }}FCFA</p>
+                        <p class="text-xs text-gray-500">Créé le {{ product.created_at|date:"d M Y" }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <h3 class="font-medium text-red-800 mb-2">⚠️ Attention</h3>
+                <ul class="text-sm text-red-700 space-y-1">
+                    <li>• Ce produit sera définitivement supprimé</li>
+                    <li>• Toutes les images associées seront supprimées</li>
+                    <li>• Cette action ne peut pas être annulée</li>
+                </ul>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="flex justify-between">
+                    <a href="{% url 'products:my_products' %}" class="btn-secondary">
+                        Annuler
+                    </a>
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                        Supprimer définitivement
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mes achats - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if notif %}
+        <div class="alert alert-info">{{ notif }}</div>
+        {% endif %} 
+
+        <!-- En-tête -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Mes achats</h1>
+            <p class="mt-2 text-gray-600">Suivez vos commandes et achats</p>
+        </div>
+
+        {% if orders %}
+            <!-- Liste des commandes -->
+            <div class="space-y-6">
+                {% for order in orders %}
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Commande #{{ order.id }}</h3>
+                                <p class="text-sm text-gray-600">{{ order.created_at|date:"d F Y à H:i" }}</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+                                    {% if order.status == 'pending' %}bg-yellow-100 text-yellow-800
+                                    {% elif order.status == 'confirmed' %}bg-blue-100 text-blue-800
+                                    {% elif order.status == 'shipped' %}bg-purple-100 text-purple-800
+                                    {% elif order.status == 'delivered' %}bg-green-100 text-green-800
+                                    {% elif order.status == 'completed' %}bg-green-100 text-green-800
+                                    {% elif order.status == 'cancelled' %}bg-red-100 text-red-800
+                                    {% endif %}">
+                                    {{ order.get_status_display }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <!-- Image produit -->
+                            {% if order.product.images.first and order.product.images.first.image %}
+                                <img src="{{ order.product.images.first.image.url }}" 
+                                     alt="{{ order.product.title }}"
+                                     class="w-16 h-16 object-cover rounded-lg">
+                            {% else %}
+                                <div class="w-16 h-16 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center rounded-lg">
+                                    <span class="text-2xl">{{ order.product.category.icon|default:"📦" }}</span>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Informations produit -->
+                            <div class="flex-1">
+                                <h4 class="font-medium text-gray-900">{{ order.product.title }}</h4>
+                                <p class="text-sm text-gray-600">Vendu par {{ order.seller.get_full_name|default:order.seller.username }}</p>
+                                <div class="flex items-center mt-1">
+                                    {% if order.delivery_method == 'delivery' %}
+                                        <span class="text-blue-600 text-sm">🚚 Livraison</span>
+                                    {% else %}
+                                        <span class="text-green-600 text-sm">🤝 Retrait</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Prix et actions -->
+                            <div class="text-right">
+                                <p class="text-lg font-bold text-flame-600">{{ order.total_price|floatformat:"0g" }}FCFA</p>
+                                <div class="mt-2 space-x-2">
+                                    <a href="{% url 'orders:order_detail' order.id %}" 
+                                       class="text-sm text-flame-600 hover:text-flame-800 font-medium">
+                                        Voir détail
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if page_obj.has_other_pages %}
+                <div class="mt-12 flex justify-center">
+                    <nav class="flex space-x-2" aria-label="Pagination">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}"
+                               class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-flame-50 transition-colors duration-200">
+                                Précédent
+                            </a>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <span class="px-3 py-2 text-sm font-bold text-white bg-flame-600 border border-flame-600 rounded-md shadow">
+                                    {{ num }}
+                                </span>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <a href="?page={{ num }}"
+                                   class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-flame-100 transition-colors duration-200">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}"
+                               class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-flame-50 transition-colors duration-200">
+                                Suivant
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            {% endif %}
+        {% else %}
+            <!-- État vide -->
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">🛒</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucun achat</h3>
+                <p class="text-gray-600 mb-6">
+                    Vous n'avez pas encore effectué d'achat sur TrocTendance.
+                </p>
+                <a href="{% url 'products:index' %}" class="btn-primary">
+                    Découvrir les produits
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Suivi de la commande -->
+{% if order %}
+    <div class="mt-8 bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Suivi de la commande #{{ order.id }}</h2>
+        <ul class="list-disc list-inside space-y-2">
+            <li>
+                <b>Créée :</b> {{ order.created_at|date:"d/m/Y H:i" }}
+            </li>
+            {% if order.confirmed_at %}
+                <li><b>Confirmée :</b> {{ order.confirmed_at|date:"d/m/Y H:i" }}</li>
+            {% endif %}
+            {% if order.shipped_at %}
+                <li><b>Expédiée :</b> {{ order.shipped_at|date:"d/m/Y H:i" }}</li>
+            {% endif %}
+            {% if order.delivered_at %}
+                <li><b>Livrée :</b> {{ order.delivered_at|date:"d/m/Y H:i" }}</li>
+            {% endif %}
+            {% if order.completed_at %}
+                <li><b>Terminée :</b> {{ order.completed_at|date:"d/m/Y H:i" }}</li>
+            {% endif %}
+            {% if order.cancelled_at %}
+                <li><b>Annulée :</b> {{ order.cancelled_at|date:"d/m/Y H:i" }}</li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}

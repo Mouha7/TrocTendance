@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static '/images/logo.png' %}" type="image/x-icon">
+    <title>{% block title %}TrocTendance - Marketplace de seconde main{% endblock %}</title>
+    
+    <!-- TailwindCSS -->
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-flame-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-flame-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div>
+                    <a href="/" class="flex items-center gap-2 text-2xl font-bold text-flame-600">
+                        <img src="{% static 'images/logo.png' %}" alt="Logo TrocTendance" class="h-8">
+                        <span>TrocTendance</span>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-flame-600">Accueil</a>
+                    
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'products:create' %}" class="text-gray-600 hover:text-flame-600">Vendre</a>
+                        <div class="relative group">
+                            <button class="flex items-center text-gray-600 hover:text-flame-600">
+                                {% if user.avatar %}
+                                    <img class="h-8 w-8 rounded-full mr-2" src="{{ user.avatar.url }}" alt="Avatar">
+                                {% else %}
+                                    <div class="h-8 w-8 rounded-full bg-flame-200 flex items-center justify-center mr-2">
+                                        <span class="text-sm font-bold text-flame-600">
+                                            {{ user.first_name.0|default:user.username.0|upper }}
+                                            {{ user.last_name.0|default:''|upper }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                                {{ user.first_name|default:user.username }}
+                            </button>
+                            
+                            <!-- Dropdown menu -->
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <div class="py-1">
+                                    <a href="{% url 'accounts:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mon profil</a>
+                                    <a href="{% url 'products:my_products' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mes annonces</a>
+                                    <a href="{% url 'orders:my_orders' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mes achats</a>
+                                    <a href="{% url 'orders:my_sales' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mes ventes</a>
+                                    <a href="{% url 'orders:inbox' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50 relative">
+                                        Messages
+                                        <span id="unread-badge" class="absolute top-0 right-30 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-flame-600 text-white"></span>
+                                    </a>
+                                    <div class="border-t border-gray-100"></div>
+                                    <a href="{% url 'accounts:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Déconnexion</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'accounts:login' %}" class="text-gray-600 hover:text-flame-600">Connexion</a>
+                        <a href="{% url 'accounts:signup' %}" class="btn-primary">Inscription</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+        {% block content %}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-flame-600 mb-4">Bienvenue sur TrocTendance 🔥</h1>
+                <p class="text-lg text-gray-600">Votre marketplace de seconde main</p>
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-flame-500 to-flame-600 text-white mt-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="text-center">
+                <p>&copy; 2025 TrocTendance. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript pour les notifications de messages -->
+    <script>
+    // Fonction pour vérifier les messages non lus
+    function checkUnreadMessages() {
+        {% if user.is_authenticated %}
+            fetch('{% url "orders:unread_count" %}')
+                .then(response => response.json())
+                .then((data) => {
+                    const badge = document.getElementById('unread-badge');
+                    if (data.unread_count > 0) {
+                        badge.textContent = data.unread_count;
+                        badge.classList.remove('hidden');
+                    } else {
+                        badge.classList.add('hidden');
+                    }
+                })
+                .catch(error => console.log('Erreur:', error));
+        {% endif %}
+    }
+
+    // Vérifier au chargement de la page
+    document.addEventListener('DOMContentLoaded', checkUnreadMessages);
+
+    // Vérifier toutes les 30 secondes
+    setInterval(checkUnreadMessages, 30000);
+    </script>
+</body>
+</html>

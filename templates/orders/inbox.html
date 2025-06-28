@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Messages - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- En-tête -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Mes messages</h1>
+                <p class="mt-2 text-gray-600">
+                    {% if total_unread > 0 %}
+                        {{ total_unread }} message{{ total_unread|pluralize }} non lu{{ total_unread|pluralize }}
+                    {% else %}
+                        Tous vos messages sont à jour
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if conversations %}
+            <!-- Liste des conversations -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                {% for item in conversations %}
+                    <div class="border-b border-gray-200 last:border-b-0">
+                        <a href="{% url 'orders:conversation_detail' item.conversation.id %}" 
+                           class="block p-6 hover:bg-flame-50 transition-colors duration-200">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center flex-1">
+                                    <!-- Avatar de l'autre utilisateur -->
+                                    <div class="flex-shrink-0">
+                                        {% if item.other_user.avatar %}
+                                            <img src="{{ item.other_user.avatar.url }}" 
+                                                 alt="{{ item.other_user.get_full_name }}"
+                                                 class="w-12 h-12 rounded-full object-cover">
+                                        {% else %}
+                                            <div class="w-12 h-12 rounded-full bg-flame-200 flex items-center justify-center">
+                                                <span class="text-lg font-bold text-flame-600">
+                                                    {{ item.other_user.first_name.0|default:item.other_user.username.0|upper }}
+                                                    {{ item.other_user.last_name.0|default:''|upper }}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <!-- Informations de la conversation -->
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="font-semibold text-gray-900">
+                                                {{ item.other_user.get_full_name|default:item.other_user.username }}
+                                                {% if item.unread_count > 0 %}
+                                                    <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-flame-100 text-flame-800">
+                                                        {{ item.unread_count }}
+                                                    </span>
+                                                {% endif %}
+                                            </h3>
+                                            <span class="text-sm text-gray-500">
+                                                {{ item.conversation.updated_at|date:"d M Y H:i" }}
+                                            </span>
+                                        </div>
+                                        
+                                        <!-- Produit concerné -->
+                                        <div class="mt-2 flex items-center text-sm text-gray-600">
+                                            <span class="mr-2">📦</span>
+                                            <span class="font-medium">{{ item.conversation.product.title }}</span>
+                                            <span class="ml-2 text-flame-600 font-bold">{{ item.conversation.product.price|floatformat:"0g" }}FCFA</span>
+                                        </div>
+                                        
+                                        <!-- Dernier message -->
+                                        {% if item.last_message %}
+                                            <p class="mt-2 text-sm text-gray-600 line-clamp-2">
+                                                <span class="font-medium">
+                                                    {% if item.last_message.sender == user %}Vous:{% else %}{{ item.last_message.sender.first_name|default:item.last_message.sender.username }}:{% endif %}
+                                                </span>
+                                                {{ item.last_message.content|truncatewords:20 }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <!-- Flèche -->
+                                <div class="ml-4">
+                                    <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if page_obj.has_other_pages %}
+                <div class="mt-8 flex justify-center">
+                    <nav class="flex space-x-2">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}" 
+                               class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                                Précédent
+                            </a>
+                        {% endif %}
+                        
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <span class="px-3 py-2 text-sm font-medium text-white bg-flame-600 border border-flame-600 rounded-md">
+                                    {{ num }}
+                                </span>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <a href="?page={{ num }}" 
+                                   class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}" 
+                               class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                                Suivant
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            {% endif %}
+        {% else %}
+            <!-- État vide -->
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">📨</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucun message</h3>
+                <p class="text-gray-600 mb-6">
+                    Vous n'avez pas encore de conversations. Contactez un vendeur pour commencer !
+                </p>
+                <a href="{% url 'products:index' %}" class="btn-primary">
+                    Parcourir les produits
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

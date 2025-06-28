@@ -1,0 +1,202 @@
+[
+	{
+		"model": "products.category",
+		"pk": 1,
+		"fields": {
+			"name": "Vêtements Femme",
+			"description": "Robes, tops, pantalons, jupes et ensembles pour femme",
+			"icon": "👚",
+			"created_at": "2025-01-01T10:00:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 2,
+		"fields": {
+			"name": "Vêtements Homme",
+			"description": "Chemises, t-shirts, pantalons et vestes pour homme",
+			"icon": "👕",
+			"created_at": "2025-01-01T10:05:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 3,
+		"fields": {
+			"name": "Vêtements Enfant",
+			"description": "Vêtements pour bébés et enfants jusqu'à 12 ans",
+			"icon": "👶",
+			"created_at": "2025-01-01T10:10:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 4,
+		"fields": {
+			"name": "Chaussures",
+			"description": "Chaussures pour femme, homme et enfant",
+			"icon": "👟",
+			"created_at": "2025-01-01T10:15:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 5,
+		"fields": {
+			"name": "Accessoires",
+			"description": "Sacs, ceintures, chapeaux et autres accessoires mode",
+			"icon": "🧢",
+			"created_at": "2025-01-01T10:20:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 6,
+		"fields": {
+			"name": "Vintage",
+			"description": "Pièces vintage et rétro des années 60 à 90",
+			"icon": "🕰️",
+			"created_at": "2025-01-01T10:25:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 7,
+		"fields": {
+			"name": "Luxe",
+			"description": "Articles de marque et pièces haut de gamme",
+			"icon": "💎",
+			"created_at": "2025-01-01T10:30:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 8,
+		"fields": {
+			"name": "Sport",
+			"description": "Vêtements et équipements sportifs",
+			"icon": "🏃",
+			"created_at": "2025-01-01T10:35:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 9,
+		"fields": {
+			"name": "Maillots de bain",
+			"description": "Bikinis, maillots une pièce et shorts de bain",
+			"icon": "🏖️",
+			"created_at": "2025-01-01T10:40:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 10,
+		"fields": {
+			"name": "Manteaux",
+			"description": "Vestes, manteaux et doudounes pour toutes saisons",
+			"icon": "🧥",
+			"created_at": "2025-01-01T10:45:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 11,
+		"fields": {
+			"name": "Jeans",
+			"description": "Denim pour femme, homme et enfant",
+			"icon": "👖",
+			"created_at": "2025-01-01T10:50:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 12,
+		"fields": {
+			"name": "Maternité",
+			"description": "Vêtements pour femmes enceintes",
+			"icon": "🤰",
+			"created_at": "2025-01-01T10:55:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 13,
+		"fields": {
+			"name": "Costumes",
+			"description": "Costumes et tenues formelles",
+			"icon": "🤵",
+			"created_at": "2025-01-01T11:00:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 14,
+		"fields": {
+			"name": "Pulls & Gilets",
+			"description": "Pulls, gilets et cardigans",
+			"icon": "🧶",
+			"created_at": "2025-01-01T11:05:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 15,
+		"fields": {
+			"name": "Sous-vêtements",
+			"description": "Culottes, soutiens-gorge, pyjamas et lingerie",
+			"icon": "🩲",
+			"created_at": "2025-01-01T11:10:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 16,
+		"fields": {
+			"name": "Vêtements de travail",
+			"description": "Tenues professionnelles et uniformes",
+			"icon": "👔",
+			"created_at": "2025-01-01T11:15:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 17,
+		"fields": {
+			"name": "Vêtements grande taille",
+			"description": "Vêtements pour morphologies plus larges",
+			"icon": "➕",
+			"created_at": "2025-01-01T11:20:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 18,
+		"fields": {
+			"name": "Éthique & Bio",
+			"description": "Vêtements écologiques et éthiques",
+			"icon": "🌱",
+			"created_at": "2025-01-01T11:25:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 19,
+		"fields": {
+			"name": "Déguisements",
+			"description": "Costumes pour fêtes et déguisements",
+			"icon": "🎭",
+			"created_at": "2025-01-01T11:30:00Z"
+		}
+	},
+	{
+		"model": "products.category",
+		"pk": 20,
+		"fields": {
+			"name": "Accessoires bébé",
+			"description": "Chaussons, bonnets et accessoires pour nouveau-nés",
+			"icon": "🧦",
+			"created_at": "2025-01-01T11:35:00Z"
+		}
+	}
+]

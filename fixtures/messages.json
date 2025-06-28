@@ -1,0 +1,299 @@
+[
+    {
+        "model": "orders.message",
+        "pk": 1,
+        "fields": {
+            "sender": 3,
+            "recipient": 5,
+            "product": 1,
+            "subject": "Disponibilité pour la robe wax",
+            "content": "Bonjour, je suis intéressé par votre robe en wax. Serait-il possible de la voir en main propre ce week-end ? Je suis disponible samedi après-midi. Merci d'avance pour votre réponse.",
+            "is_read": true,
+            "created_at": "2025-05-14T08:20:00Z",
+            "updated_at": "2025-05-14T08:20:00Z",
+            "read_at": "2025-05-14T10:45:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 2,
+        "fields": {
+            "sender": 5,
+            "recipient": 3,
+            "product": 1,
+            "subject": "Re: Disponibilité pour la robe wax",
+            "content": "Bonjour, oui c'est possible samedi après-midi. On peut se retrouver à 15h devant la pharmacie du Plateau si cela vous convient. Je vous apporterai la robe dans sa housse de protection.",
+            "is_read": true,
+            "created_at": "2025-05-14T11:30:00Z",
+            "updated_at": "2025-05-14T11:30:00Z",
+            "read_at": "2025-05-14T12:15:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 3,
+        "fields": {
+            "sender": 4,
+            "recipient": 6,
+            "product": 4,
+            "subject": "Taille des baskets Adidas",
+            "content": "Salam, je porte habituellement du 41. Pensez-vous que votre paire en 42 pourrait me convenir ? Les Adidas taillent-elles grand ? Merci pour votre aide.",
+            "is_read": true,
+            "created_at": "2025-05-17T09:15:00Z",
+            "updated_at": "2025-05-17T09:15:00Z",
+            "read_at": "2025-05-17T11:20:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 4,
+        "fields": {
+            "sender": 7,
+            "recipient": 8,
+            "product": 6,
+            "subject": "Réduction possible ?",
+            "content": "Bonjour, je suis intéressée par votre veste en jean mais le prix me semble un peu élevé pour l'état décrit. Seriez-vous disposé à baisser à 10 000 FCFA ? Cordialement.",
+            "is_read": true,
+            "created_at": "2025-05-19T14:40:00Z",
+            "updated_at": "2025-05-19T14:40:00Z",
+            "read_at": "2025-05-19T16:05:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 5,
+        "fields": {
+            "sender": 9,
+            "recipient": 2,
+            "product": 7,
+            "subject": "Détails sur le costume",
+            "content": "As-salam alaykum, pourriez-vous me préciser la marque du costume et s'il a déjà été retouché ou reprisé ? Aussi, quelle est votre disponibilité pour un essayage ? Barakalloufik.",
+            "is_read": true,
+            "created_at": "2025-05-20T10:50:00Z",
+            "updated_at": "2025-05-20T10:50:00Z",
+            "read_at": "2025-05-20T12:30:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 6,
+        "fields": {
+            "sender": 6,
+            "recipient": 7,
+            "product": 5,
+            "subject": "Plus de photos du sac",
+            "content": "Bonjour, pourriez-vous m'envoyer des photos supplémentaires du sac, notamment des fermetures et de l'intérieur ? Merci d'avance.",
+            "is_read": true,
+            "created_at": "2025-05-18T13:25:00Z",
+            "updated_at": "2025-05-18T13:25:00Z",
+            "read_at": "2025-05-18T15:10:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 7,
+        "fields": {
+            "sender": 8,
+            "recipient": 9,
+            "product": 8,
+            "subject": "Urgent : robe de soirée",
+            "content": "Bonjour, j'ai un mariage demain et votre robe me plaît beaucoup. Est-elle toujours disponible pour un retrait immédiat ? Je peux me déplacer dès maintenant. Merci de votre réponse rapide.",
+            "is_read": true,
+            "created_at": "2025-05-21T18:30:00Z",
+            "updated_at": "2025-05-21T18:30:00Z",
+            "read_at": "2025-05-21T18:45:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 8,
+        "fields": {
+            "sender": 2,
+            "recipient": 9,
+            "product": 12,
+            "subject": "Ensemble bébé - lavage",
+            "content": "Bonjour, à quelle température avez-vous lavé l'ensemble pour bébé ? Les couleurs ont-elles déteint ? Merci pour ces précisions.",
+            "is_read": true,
+            "created_at": "2025-05-25T11:40:00Z",
+            "updated_at": "2025-05-25T11:40:00Z",
+            "read_at": "2025-05-25T13:20:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 9,
+        "fields": {
+            "sender": 5,
+            "recipient": 3,
+            "product": 9,
+            "subject": "Confirmation RDV",
+            "content": "Je confirme notre RDV demain à 16h devant l'UCAD. Je serai en t-shirt rouge pour que vous me reconnaissiez. A demain !",
+            "is_read": true,
+            "created_at": "2025-05-22T17:15:00Z",
+            "updated_at": "2025-05-22T17:15:00Z",
+            "read_at": "2025-05-22T17:30:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 10,
+        "fields": {
+            "sender": 4,
+            "recipient": 6,
+            "product": 11,
+            "subject": "Pantalon disponible ?",
+            "content": "Salam alaykum, le pantalon est-il toujours disponible ? Si oui, pouvez-vous me dire s'il a été retouché ou s'il est d'origine ? Merci.",
+            "is_read": false,
+            "created_at": "2025-05-24T15:50:00Z",
+            "updated_at": "2025-05-24T15:50:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 11,
+        "fields": {
+            "sender": 7,
+            "recipient": 8,
+            "product": 14,
+            "subject": "Maillot de bain - taille",
+            "content": "Bonjour, je fais habituellement du 38 en haut et 40 en bas. Pensez-vous que votre maillot taille 40 pourrait me convenir ? Merci pour votre conseil.",
+            "is_read": true,
+            "created_at": "2025-05-27T12:35:00Z",
+            "updated_at": "2025-05-27T12:35:00Z",
+            "read_at": "2025-05-27T14:00:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 12,
+        "fields": {
+            "sender": 3,
+            "recipient": 8,
+            "product": 15,
+            "subject": "Veste en cuir - origine",
+            "content": "Bonjour, pourriez-vous me dire d'où vient cette veste en cuir ? Est-ce une marque connue ou de l'artisanat local ? Avez-vous encore la facture ? Merci.",
+            "is_read": true,
+            "created_at": "2025-05-28T10:20:00Z",
+            "updated_at": "2025-05-28T10:20:00Z",
+            "read_at": "2025-05-28T11:45:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 13,
+        "fields": {
+            "sender": 6,
+            "recipient": 7,
+            "product": 17,
+            "subject": "Pull en laine - entretien",
+            "content": "As-salam alaykum, comment avez-vous lavé ce pull en laine ? Est-il rétréci au lavage ? Je porte habituellement du L, pensez-vous qu'il m'irait ? Merci.",
+            "is_read": true,
+            "created_at": "2025-05-30T09:10:00Z",
+            "updated_at": "2025-05-30T09:10:00Z",
+            "read_at": "2025-05-30T10:30:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 14,
+        "fields": {
+            "sender": 9,
+            "recipient": 2,
+            "product": 18,
+            "subject": "Chapeau Panama - authenticité",
+            "content": "Bonjour, comment puis-je vérifier que ce chapeau est un véritable Panama ? Avez-vous un certificat ou une preuve d'authenticité ? Merci.",
+            "is_read": false,
+            "created_at": "2025-05-31T16:45:00Z",
+            "updated_at": "2025-05-31T16:45:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 15,
+        "fields": {
+            "sender": 5,
+            "recipient": 3,
+            "product": 19,
+            "subject": "Pyjama bébé - cadeau",
+            "content": "Bonjour, je souhaite offrir ce pyjama. Pourriez-vous l'emballer comme un cadeau si je viens le chercher ? Merci d'avance.",
+            "is_read": true,
+            "created_at": "2025-06-01T14:20:00Z",
+            "updated_at": "2025-06-01T14:20:00Z",
+            "read_at": "2025-06-01T15:00:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 16,
+        "fields": {
+            "sender": 8,
+            "recipient": 4,
+            "product": 20,
+            "subject": "Ceinture - longueur",
+            "content": "Salam, pourriez-vous mesurer la longueur totale de la ceinture (sans la boucle) ? Je fais 95cm de tour de taille, pensez-vous qu'elle m'irait ? Merci.",
+            "is_read": true,
+            "created_at": "2025-06-02T11:30:00Z",
+            "updated_at": "2025-06-02T11:30:00Z",
+            "read_at": "2025-06-02T13:15:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 17,
+        "fields": {
+            "sender": 2,
+            "recipient": 9,
+            "product": 16,
+            "subject": "Jupe crayon - matière",
+            "content": "Bonjour, la jupe est-elle 100% coton ou contient-elle de l'élasthanne ? Avez-vous une photo de l'étiquette de composition ? Merci.",
+            "is_read": true,
+            "created_at": "2025-06-03T10:40:00Z",
+            "updated_at": "2025-06-03T10:40:00Z",
+            "read_at": "2025-06-03T12:20:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 18,
+        "fields": {
+            "sender": 7,
+            "recipient": 5,
+            "product": 10,
+            "subject": "Sandales - usure semelle",
+            "content": "Bonjour, pourriez-vous décrire l'état de la semelle des sandales ? Sont-elles encore antidérapantes ? Merci.",
+            "is_read": false,
+            "created_at": "2025-06-04T15:25:00Z",
+            "updated_at": "2025-06-04T15:25:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 19,
+        "fields": {
+            "sender": 3,
+            "recipient": 8,
+            "product": 13,
+            "subject": "Chemise lin - repassage",
+            "content": "La chemise en lin nécessite-t-elle un repassage fréquent ou le tissu se défroisse-t-il facilement ? Merci pour votre retour.",
+            "is_read": true,
+            "created_at": "2025-06-05T09:50:00Z",
+            "updated_at": "2025-06-05T09:50:00Z",
+            "read_at": "2025-06-05T11:10:00Z"
+        }
+    },
+    {
+        "model": "orders.message",
+        "pk": 20,
+        "fields": {
+            "sender": 4,
+            "recipient": 6,
+            "product": 3,
+            "subject": "Boubou homme - essayage",
+            "content": "As-salam alaykum, je suis intéressé par le boubou mais j'aimerais l'essayer avant. Seriez-vous disponible demain après la prière de Dhuhr ? Merci.",
+            "is_read": true,
+            "created_at": "2025-06-06T14:15:00Z",
+            "updated_at": "2025-06-06T14:15:00Z",
+            "read_at": "2025-06-06T16:00:00Z"
+        }
+    }
+]

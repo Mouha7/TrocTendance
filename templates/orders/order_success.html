@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Commande confirmée - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50 py-8">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Animation de succès -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-green-500 rounded-full mb-4">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Commande confirmée !</h1>
+            <p class="text-lg text-gray-600">Merci pour votre achat sur TrocTendance</p>
+        </div>
+
+        <!-- Détails de la commande -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="border-b border-gray-200 pb-4 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900">Commande #{{ order.id }}</h2>
+                <p class="text-sm text-gray-600">Passée le {{ order.created_at|date:"d F Y à H:i" }}</p>
+            </div>
+
+            <!-- Produit -->
+            <div class="flex items-center space-x-4 mb-6">
+                {% if order.product.images.first and order.product.images.first.image %}
+                    <img src="{{ order.product.images.first.image.url }}" 
+                         alt="{{ order.product.title }}"
+                         class="w-16 h-16 object-cover rounded-lg">
+                {% else %}
+                    <div class="w-16 h-16 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center rounded-lg">
+                        <span class="text-2xl">{{ order.product.category.icon|default:"📦" }}</span>
+                    </div>
+                {% endif %}
+                
+                <div class="flex-1">
+                    <h3 class="font-semibold text-gray-900">{{ order.product.title }}</h3>
+                    <p class="text-sm text-gray-600">{{ order.product.get_condition_display }}</p>
+                    <p class="text-lg font-bold text-flame-600">{{ order.total_price|floatformat:"0g" }}FCFA</p>
+                </div>
+            </div>
+
+            <!-- Vendeur -->
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <h4 class="font-medium text-gray-900 mb-3">Vendeur</h4>
+                <div class="flex items-center space-x-3">
+                    {% if order.seller.avatar %}
+                        <img src="{{ order.seller.avatar.url }}" 
+                             alt="{{ order.seller.get_full_name }}"
+                             class="w-10 h-10 rounded-full object-cover">
+                    {% else %}
+                        <div class="w-10 h-10 rounded-full bg-flame-200 flex items-center justify-center">
+                            <span class="text-sm font-bold text-flame-600">
+                                {{ order.seller.first_name.0|default:order.seller.username.0|upper }}
+                                {{ order.seller.last_name.0|default:''|upper }}
+                            </span>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <div class="font-medium text-gray-900">{{ order.seller.get_full_name|default:order.seller.username }}</div>
+                        <div class="flex items-center text-sm">
+                            <span class="text-flame-500 font-medium">{{ order.seller.seller_rating }}</span>
+                            <span class="text-flame-400 ml-1">⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Livraison -->
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-medium text-gray-900 mb-3">Mode de livraison</h4>
+                <div class="flex items-center space-x-2 mb-2">
+                    {% if order.delivery_method == 'delivery' %}
+                        <span class="text-blue-600">🚚</span>
+                        <span class="font-medium">Livraison à domicile</span>
+                    {% else %}
+                        <span class="text-green-600">🤝</span>
+                        <span class="font-medium">Retrait en main propre</span>
+                    {% endif %}
+                </div>
+                {% if order.delivery_address %}
+                    <p class="text-sm text-gray-600 ml-6">{{ order.delivery_address }}</p>
+                {% endif %}
+                {% if order.pickup_location %}
+                    <p class="text-sm text-gray-600 ml-6">{{ order.pickup_location }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Prochaines étapes -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+            <h3 class="font-semibold text-blue-900 mb-3">📋 Prochaines étapes</h3>
+            <div class="space-y-2 text-sm text-blue-800">
+                <div class="flex items-center">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                    <span>Le vendeur va recevoir une notification de votre commande</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-2 h-2 bg-gray-300 rounded-full mr-3"></span>
+                    <span>Il va confirmer la disponibilité du produit</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-2 h-2 bg-gray-300 rounded-full mr-3"></span>
+                    <span>Vous recevrez ses coordonnées pour organiser la récupération</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="{% url 'orders:my_orders' %}" class="btn-primary flex-1 text-center py-3">
+                📦 Voir mes commandes
+            </a>
+            <a href="{% url 'orders:inbox' %}" class="btn-secondary flex-1 text-center py-3">
+                💬 Contacter le vendeur
+            </a>
+            <a href="{% url 'products:index' %}" class="btn-secondary flex-1 text-center py-3">
+                🏠 Retour à l'accueil
+            </a>
+        </div>
+
+        <!-- Information -->
+        <div class="mt-8 text-center text-sm text-gray-600">
+            <p>Vous pouvez suivre votre commande dans votre espace client</p>
+            <p>Une notification sera envoyée au vendeur automatiquement</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

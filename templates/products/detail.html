@@ -1,0 +1,327 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }} - TrocTendance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-flame-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="{% url 'products:index' %}" class="text-gray-700 hover:text-flame-600">
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <a href="{% url 'products:index' %}?category={{ product.category.id }}" class="text-gray-700 hover:text-flame-600 ml-1 md:ml-2">
+                            {{ product.category.icon }} {{ product.category.name }}
+                        </a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-gray-500 ml-1 md:ml-2 truncate">{{ product.title|truncatechars:30 }}</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Images du produit -->
+                <div class="p-6">
+                    {% if product.images.all %}
+                        <!-- Image principale -->
+                        <div class="mb-4">
+                            <img id="main-image" 
+                                 src="{% if product.images.first.image %}{{ product.images.first.image.url }}{% else %}{% static product.images.first.image.name %}{% endif %}" 
+                                 alt="{{ product.images.first.alt_text|default:product.title }}"
+                                 class="w-full h-96 object-cover rounded-lg">
+                        </div>
+                        
+                        <!-- Miniatures -->
+                        {% if product.images.count > 1 %}
+                            <div class="flex space-x-2 overflow-x-auto">
+                                {% for image in product.images.all %}
+                                    <button onclick="changeMainImage('{% if image.image %}{{ image.image.url }}{% else %}{% static image.image.name %}{% endif %}')" 
+                                            class="flex-shrink-0 thumbnail-btn {% if forloop.first %}active{% endif %}">
+                                        <img src="{% if image.image %}{{ image.image.url }}{% else %}{% static image.image.name %}{% endif %}" 
+                                             alt="{{ image.alt_text|default:product.title }}"
+                                             class="w-20 h-20 object-cover rounded-lg border-2 border-transparent hover:border-flame-500 transition-all duration-200">
+                                    </button>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <!-- Placeholder si pas d'image -->
+                        <div class="w-full h-96 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center rounded-lg">
+                            <div class="text-center">
+                                <span class="text-6xl mb-4 block">{{ product.category.icon|default:"📦" }}</span>
+                                <span class="text-flame-600 text-lg font-medium">{{ product.category.name }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Informations du produit -->
+                <div class="p-6">
+                    <!-- En-tête -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-3 py-1 text-sm font-medium rounded-full
+                                {% if product.condition == 'new' %}bg-green-100 text-green-800
+                                {% elif product.condition == 'like_new' %}bg-blue-100 text-blue-800
+                                {% elif product.condition == 'good' %}bg-yellow-100 text-yellow-800
+                                {% elif product.condition == 'fair' %}bg-orange-100 text-orange-800
+                                {% else %}bg-red-100 text-red-800{% endif %}">
+                                {{ product.get_condition_display }}
+                            </span>
+                            <span class="text-xs text-gray-500">
+                                Publié le {{ product.created_at|date:"d M Y" }}
+                            </span>
+                        </div>
+                        
+                        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+                            {{ product.title }}
+                        </h1>
+                        
+                        <div class="text-4xl font-bold text-flame-600 mb-6">
+                            {{ product.price|floatformat:"0g" }}FCFA
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Description</h3>
+                        <p class="text-gray-700 leading-relaxed whitespace-pre-line">{{ product.description }}</p>
+                    </div>
+
+                    <!-- Informations vendeur -->
+                    <div class="bg-flame-50 rounded-lg p-4 mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Vendeur</h3>
+                        <div class="flex items-center">
+                            {% if product.seller.avatar %}
+                                <img src="{{ product.seller.avatar.url }}" 
+                                    alt="{{ product.seller.get_full_name }}"
+                                    class="w-12 h-12 rounded-full mr-4">
+                            {% else %}
+                                <div class="w-12 h-12 rounded-full bg-flame-200 flex items-center justify-center mr-4">
+                                    <span class="text-lg font-bold text-flame-600">
+                                        {{ product.seller.first_name.0|default:product.seller.username.0|upper }}
+                                        {{ product.seller.last_name.0|default:''|upper }}
+                                    </span>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="flex-1">
+                                <div class="font-semibold text-gray-900">
+                                    {{ product.seller.get_full_name|default:product.seller.username }}
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <span class="text-flame-500 font-medium">{{ product.seller.seller_rating }}</span>
+                                    <span class="text-flame-400 ml-1">⭐</span>
+                                    <span class="ml-2">Membre depuis {{ product.seller.date_joined|date:"M Y" }}</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <span class="text-flame-500 font-medium">
+                                        {{ product.seller.reviews_received.count }} avis
+                                    </span>
+                                    <span class="ml-2">
+                                        {% if product.seller.seller_rating %}
+                                            {{ product.seller.seller_rating }}/5 ⭐
+                                        {% else %}
+                                            Pas encore noté
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="space-y-4">
+                        {% if user.is_authenticated %}
+                            {% if user != product.seller %}
+                                <!-- Bouton principal : Contacter le vendeur -->
+                                <a href="{% url 'orders:new_message' product.pk %}" 
+                                   class="flex items-center justify-center w-full bg-flame-600 hover:bg-flame-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-4.126-.98L3 20l1.98-5.874A8.955 8.955 0 013 12c0-4.418 3.582-8 8-8s8 3.582 8 8z"></path>
+                                    </svg>
+                                    Contacter le vendeur
+                                </a>
+                                
+                                <!-- Séparateur visuel -->
+                                <div class="relative">
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="w-full border-t border-gray-200"></div>
+                                    </div>
+                                    <div class="relative flex justify-center text-sm">
+                                        <span class="bg-white px-2 text-gray-500">ou</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Bouton secondaire : Acheter maintenant -->
+                                <div class="flex gap-2 flex-col sm:flex-row">
+                                    <a href="{% url 'orders:checkout' product.pk %}" 
+                                    class="flex items-center justify-center w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 4.5M7 13l-1.5 4.5m0 0H4M7 13h10m-10 0L5.5 9.5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+                                        </svg>
+                                        Acheter maintenant
+                                    </a>
+                                    <a href="{% url 'orders:propose_exchange' product.pk %}" 
+                                        class="flex items-center justify-center w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 4.5M7 13l-1.5 4.5m0 0H4M7 13h10m-10 0L5.5 9.5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+                                        </svg>
+                                        Proposer un échange
+                                    </a>
+                                </div>
+                                
+                                <!-- Message informatif -->
+                                <div class="flex items-center justify-center text-sm text-gray-600 mt-3">
+                                    <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Paiement sécurisé • Livraison ou retrait
+                                </div>
+                                
+                            {% else %}
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                                    <div class="text-blue-600 text-4xl mb-3">📝</div>
+                                    <p class="text-blue-800 font-semibold mb-4">C'est votre annonce</p>
+                                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                                        <a href="{% url 'products:update' product.pk %}" 
+                                            class="btn-secondary flex items-center justify-center py-2 px-4">
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                            Modifier
+                                        </a>
+                                        <a href="{% url 'products:delete' product.pk %}" 
+                                            class="text-red-600 hover:text-red-800 font-medium border border-red-300 hover:border-red-500 rounded-lg py-2 px-4 transition-colors flex items-center justify-center">
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                <div class="text-gray-400 text-4xl mb-3">🔒</div>
+                                <p class="text-gray-600 mb-4 font-medium">Connectez-vous pour contacter le vendeur</p>
+                                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                                    <a href="{% url 'accounts:login' %}" class="btn-primary py-3 px-6">
+                                        Se connecter
+                                    </a>
+                                    <a href="{% url 'accounts:signup' %}" class="btn-secondary py-3 px-6">
+                                        S'inscrire
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Informations supplémentaires -->
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <span class="font-medium text-gray-700">Catégorie :</span>
+                                <span class="text-gray-600">{{ product.category.icon }} {{ product.category.name }}</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-700">État :</span>
+                                <span class="text-gray-600">{{ product.get_condition_display }}</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-700">Statut :</span>
+                                <span class="text-green-600 font-medium">{{ product.get_status_display }}</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-700">ID :</span>
+                                <span class="text-gray-600">#{{ product.id }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Produits similaires -->
+        {% if similar_products %}
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Produits similaires</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for similar_product in similar_products %}
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="relative">
+                                <a href="{% url 'products:detail' similar_product.pk %}">
+                                    {% if similar_product.images.first and similar_product.images.first.image %}
+                                        <img src="{% if similar_product.images.first.image %}{{ similar_product.images.first.image.url }}{% else %}{% static similar_product.images.first.image.name %}{% endif %}" 
+                                            alt="{{ similar_product.images.first.alt_text|default:similar_product.title }}"
+                                            class="w-full h-48 object-cover">
+                                    {% else %}
+                                        <div class="w-full h-48 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center">
+                                            <div class="text-center">
+                                                <span class="text-4xl mb-2 block">{{ similar_product.category.icon|default:"📦" }}</span>
+                                                <span class="text-flame-600 text-sm font-medium">{{ similar_product.category.name }}</span>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 line-clamp-2 mb-2">
+                                    <a href="{% url 'products:detail' similar_product.pk %}" class="hover:text-flame-600">
+                                        {{ similar_product.title }}
+                                    </a>
+                                </h3>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-flame-600">
+                                        {{ similar_product.price|floatformat:"0g" }}FCFA
+                                    </span>
+                                    <span class="text-xs text-gray-500">
+                                        {{ similar_product.created_at|date:"d M" }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- JavaScript pour le carrousel d'images -->
+<script>
+function changeMainImage(imageUrl) {
+    document.getElementById('main-image').src = imageUrl;
+    
+    // Mettre à jour les boutons de miniatures
+    document.querySelectorAll('.thumbnail-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.closest('.thumbnail-btn').classList.add('active');
+}
+</script>
+
+<style>
+.thumbnail-btn.active img {
+    border-color: #EA580C !important;
+}
+</style>
+{% endblock %}
