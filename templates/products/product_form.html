@@ -46,13 +46,24 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Titre -->
-                        <div class="md:col-span-2">
+                        <div>
                             <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.title.label }}
                             </label>
                             {{ form.title }}
                             {% if form.title.errors %}
                                 <p class="mt-1 text-sm text-red-600">{{ form.title.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Opération -->
+                        <div>
+                            <label for="{{ form.operation.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.operation.label }}
+                            </label>
+                            {{ form.operation }}
+                            {% if form.operation.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.operation.errors.0 }}</p>
                             {% endif %}
                         </div>
                         

@@ -9,87 +9,223 @@
     
     <!-- TailwindCSS -->
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    
+    <!-- Google Fonts pour l'élégance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .logo-text { font-weight: 700; letter-spacing: -0.02em; }
+        .nav-link { transition: all 0.3s ease; position: relative; }
+        .nav-link::after { 
+            content: ''; 
+            position: absolute; 
+            width: 0; 
+            height: 2px; 
+            bottom: -5px; 
+            left: 50%; 
+            background-color: #000; 
+            transition: all 0.3s ease; 
+            transform: translateX(-50%); 
+        }
+        .nav-link:hover::after { width: 100%; }
+        .dropdown-menu { 
+            backdrop-filter: blur(10px); 
+            background: rgba(255, 255, 255, 0.95); 
+            border: 1px solid rgba(0, 0, 0, 0.1); 
+        }
+        .avatar-placeholder { 
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%); 
+            border: 2px solid #000; 
+        }
+    </style>
 </head>
-<body class="bg-flame-50 min-h-screen">
-    <!-- Header -->
-    <header class="bg-white shadow-sm border-b border-flame-100">
+
+<body class="bg-white text-black min-h-screen flex flex-col">
+    <!-- Header raffiné -->
+    <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div>
-                    <a href="/" class="flex items-center gap-2 text-2xl font-bold text-flame-600">
-                        <img src="{% static 'images/logo.png' %}" alt="Logo TrocTendance" class="h-8">
-                        <span>TrocTendance</span>
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo élégant -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-3 group">
+                        <div class="relative">
+                            <img src="{% static 'images/logo.png' %}" alt="TrocTendance" class="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-105">
+                        </div>
+                        <span class="logo-text text-2xl text-black">TrocTendance</span>
                     </a>
                 </div>
-                <nav class="flex items-center space-x-4">
-                    <a href="/" class="text-gray-600 hover:text-flame-600">Accueil</a>
+
+                <!-- Navigation principale -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'products:index' %}" class="nav-link text-black hover:text-gray-600 font-medium">Catalogue</a>
                     
                     {% if user.is_authenticated %}
-                        <a href="{% url 'products:create' %}" class="text-gray-600 hover:text-flame-600">Vendre</a>
+                        <a href="{% url 'products:create' %}" class="btn-secondary">Vendre</a>
+                        
+                        <!-- Menu utilisateur sophistiqué -->
                         <div class="relative group">
-                            <button class="flex items-center text-gray-600 hover:text-flame-600">
+                            <button class="flex items-center space-x-2 text-black hover:text-gray-600 focus:outline-none group">
                                 {% if user.avatar %}
-                                    <img class="h-8 w-8 rounded-full mr-2" src="{{ user.avatar.url }}" alt="Avatar">
+                                    <img class="h-10 w-10 rounded-full object-cover border-2 border-gray-200 group-hover:border-black transition-colors duration-300" 
+                                         src="{{ user.avatar.url }}" alt="Avatar">
                                 {% else %}
-                                    <div class="h-8 w-8 rounded-full bg-flame-200 flex items-center justify-center mr-2">
-                                        <span class="text-sm font-bold text-flame-600">
-                                            {{ user.first_name.0|default:user.username.0|upper }}
-                                            {{ user.last_name.0|default:''|upper }}
+                                    <div class="avatar-placeholder h-10 w-10 rounded-full flex items-center justify-center group-hover:border-gray-400 transition-colors duration-300">
+                                        <span class="text-sm font-semibold text-black">
+                                            {{ user.first_name.0|default:user.username.0|upper }}{{ user.last_name.0|default:''|upper }}
                                         </span>
                                     </div>
                                 {% endif %}
-                                {{ user.first_name|default:user.username }}
+                                <span class="font-medium">{{ user.first_name|default:user.username }}</span>
+                                <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
                             </button>
                             
-                            <!-- Dropdown menu -->
-                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                <div class="py-1">
-                                    <a href="{% url 'accounts:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mon profil</a>
-                                    <a href="{% url 'products:my_products' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mes annonces</a>
-                                    <a href="{% url 'orders:my_orders' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mes achats</a>
-                                    <a href="{% url 'orders:my_sales' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Mes ventes</a>
-                                    <a href="{% url 'orders:inbox' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50 relative">
-                                        Messages
-                                        <span id="unread-badge" class="absolute top-0 right-30 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-flame-600 text-white"></span>
+                            <!-- Menu déroulant élégant -->
+                            <div class="dropdown-menu absolute right-0 mt-3 w-64 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
+                                <div class="p-4 border-b border-gray-100">
+                                    <div class="flex items-center space-x-3">
+                                        {% if user.avatar %}
+                                            <img class="h-12 w-12 rounded-full object-cover" src="{{ user.avatar.url }}" alt="Avatar">
+                                        {% else %}
+                                            <div class="avatar-placeholder h-12 w-12 rounded-full flex items-center justify-center">
+                                                <span class="text-sm font-semibold text-black">
+                                                    {{ user.first_name.0|default:user.username.0|upper }}{{ user.last_name.0|default:''|upper }}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                        <div>
+                                            <p class="font-semibold text-black">{{ user.get_full_name|default:user.username }}</p>
+                                            <p class="text-sm text-gray-500">{{ user.email }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="py-2">
+                                    <a href="{% url 'accounts:profile' %}" class="flex items-center px-4 py-3 text-black hover:bg-gray-50 transition-colors duration-200">
+                                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                        Mon profil
                                     </a>
-                                    <div class="border-t border-gray-100"></div>
-                                    <a href="{% url 'accounts:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-flame-50">Déconnexion</a>
+                                    <a href="{% url 'products:my_products' %}" class="flex items-center px-4 py-3 text-black hover:bg-gray-50 transition-colors duration-200">
+                                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                        </svg>
+                                        Mes annonces
+                                    </a>
+                                    <a href="{% url 'orders:my_orders' %}" class="flex items-center px-4 py-3 text-black hover:bg-gray-50 transition-colors duration-200">
+                                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                        </svg>
+                                        Mes achats
+                                    </a>
+                                    <a href="{% url 'orders:my_sales' %}" class="flex items-center px-4 py-3 text-black hover:bg-gray-50 transition-colors duration-200">
+                                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                        </svg>
+                                        Mes ventes
+                                    </a>
+                                    <a href="{% url 'orders:inbox' %}" class="flex items-center px-4 py-3 text-black hover:bg-gray-50 transition-colors duration-200 relative">
+                                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                        </svg>
+                                        Messages
+                                        <span id="unread-badge" class="ml-auto bg-black text-white text-xs font-bold px-2 py-1 rounded-full hidden"></span>
+                                    </a>
+                                </div>
+                                
+                                <div class="border-t border-gray-100 py-2">
+                                    <a href="{% url 'accounts:logout' %}" class="flex items-center px-4 py-3 text-red-600 hover:bg-red-50 transition-colors duration-200">
+                                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                        </svg>
+                                        Déconnexion
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     {% else %}
-                        <a href="{% url 'accounts:login' %}" class="text-gray-600 hover:text-flame-600">Connexion</a>
+                        <a href="{% url 'accounts:login' %}" class="btn-secondary">Connexion</a>
                         <a href="{% url 'accounts:signup' %}" class="btn-primary">Inscription</a>
                     {% endif %}
                 </nav>
+
+                <!-- Menu mobile -->
+                <div class="md:hidden">
+                    <button class="text-black hover:text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Contenu principal -->
     <main class="flex-1">
         {% block content %}
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center">
-                <h1 class="text-4xl font-bold text-flame-600 mb-4">Bienvenue sur TrocTendance 🔥</h1>
-                <p class="text-lg text-gray-600">Votre marketplace de seconde main</p>
+                <h1 class="text-5xl font-bold text-black mb-6 tracking-tight">Bienvenue sur TrocTendance</h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Votre marketplace de seconde main élégante et responsable. Donnez une seconde vie à vos vêtements avec style.
+                </p>
+                <div class="mt-10">
+                    <a href="{% url 'products:index' %}" class="btn-primary text-lg px-8 py-4">
+                        Découvrir le catalogue
+                    </a>
+                </div>
             </div>
         </div>
         {% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gradient-to-r from-flame-500 to-flame-600 text-white mt-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="text-center">
-                <p>&copy; 2025 TrocTendance. Tous droits réservés.</p>
+    <!-- Footer élégant -->
+    <footer class="bg-black text-white py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo et description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="{% static 'images/logo.png' %}" alt="TrocTendance" class="h-10 w-10 object-contain filter invert">
+                        <span class="logo-text text-xl text-white">TrocTendance</span>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed max-w-md">
+                        La marketplace de référence pour la mode de seconde main. Élégance, qualité et responsabilité environnementale.
+                    </p>
+                </div>
+                
+                <!-- Liens utiles -->
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Navigation</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="{% url 'products:index' %}" class="hover:text-white transition-colors">Catalogue</a></li>
+                        <li><a href="{% url 'products:create' %}" class="hover:text-white transition-colors">Vendre</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>Support client</li>
+                        <li>À propos</li>
+                        <li>Conditions d'utilisation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 TrocTendance. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript pour les notifications de messages -->
+    <!-- JavaScript pour les notifications -->
     <script>
-    // Fonction pour vérifier les messages non lus
     function checkUnreadMessages() {
         {% if user.is_authenticated %}
             fetch('{% url "orders:unread_count" %}')
@@ -107,10 +243,7 @@
         {% endif %}
     }
 
-    // Vérifier au chargement de la page
     document.addEventListener('DOMContentLoaded', checkUnreadMessages);
-
-    // Vérifier toutes les 30 secondes
     setInterval(checkUnreadMessages, 30000);
     </script>
 </body>

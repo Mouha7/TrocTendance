@@ -4,23 +4,22 @@ from .models import Size, User
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
-        'class': 'input-field',
+        'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
         'placeholder': 'votre@email.com'
     }))
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={
-        'class': 'input-field',
+        'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
         'placeholder': 'Prénom'
     }))
     last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={
-        'class': 'input-field',
+        'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
         'placeholder': 'Nom'
     }))
     size = forms.ChoiceField(
         choices=Size.choices,
         initial=Size.M,
         widget=forms.Select(attrs={
-            'class': 'input-field',
-            'placeholder': 'Taille'
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white appearance-none'
     }))
     
     class Meta:
@@ -30,15 +29,15 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
-            'class': 'input-field',
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
             'placeholder': 'Nom d\'utilisateur'
         })
         self.fields['password1'].widget.attrs.update({
-            'class': 'input-field',
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
             'placeholder': 'Mot de passe'
         })
         self.fields['password2'].widget.attrs.update({
-            'class': 'input-field',
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
             'placeholder': 'Confirmer le mot de passe'
         })
     
@@ -58,13 +57,34 @@ class ProfileEditForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'size', 'email', 'phone', 'address', 'avatar']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Prénom'}),
-            'last_name': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Nom'}),
-            'email': forms.EmailInput(attrs={'class': 'input-field', 'placeholder': 'Email'}),
-            'size': forms.Select(attrs={'class': 'input-field'}),
-            'phone': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Téléphone'}),
-            'address': forms.Textarea(attrs={'class': 'input-field', 'rows': 2, 'placeholder': 'Adresse'}),
-            'avatar': forms.ClearableFileInput(attrs={'class': 'input-field'}),
+            'first_name': forms.TextInput(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
+                'placeholder': 'Prénom'
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
+                'placeholder': 'Nom'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
+                'placeholder': 'Email'
+            }),
+            'size': forms.Select(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white appearance-none'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
+                'placeholder': 'Téléphone'
+            }),
+            'address': forms.Textarea(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white resize-vertical',
+                'rows': 2,
+                'placeholder': 'Adresse'
+            }),
+            'avatar': forms.ClearableFileInput(attrs={
+                'class': 'w-full file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-black file:text-white hover:file:bg-gray-800 file:transition-colors file:duration-300',
+                'accept': 'image/*'
+            }),
         }
         labels = {
             'first_name': 'Prénom',

@@ -4,63 +4,235 @@
 {% block title %}Supprimer {{ product.title }} - TrocTendance{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-flame-50 py-8">
+<div class="min-h-screen bg-gray-50 py-12">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-lg shadow-lg p-6">
-            <div class="flex items-center mb-6">
-                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
-                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-                    </svg>
-                </div>
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Supprimer le produit</h1>
-                    <p class="text-gray-600">Cette action est irréversible</p>
-                </div>
-            </div>
+        <!-- Breadcrumb élégant -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-2 text-sm">
+                <li class="inline-flex items-center">
+                    <a href="{% url 'products:my_products' %}" class="text-gray-500 hover:text-black transition-colors duration-300">
+                        Mes annonces
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-gray-700 font-medium">Supprimer</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
 
-            <!-- Aperçu du produit -->
-            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+        <!-- Contenu principal -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+            <!-- En-tête avec icône et titre -->
+            <div class="bg-gradient-to-r from-gray-50 to-white p-8 border-b border-gray-100">
                 <div class="flex items-center">
-                    {% if product.images.first and product.images.first.image %}
-                        <img src="{{ product.images.first.image.url }}" 
-                             alt="{{ product.images.first.alt_text|default:product.title }}"
-                             class="w-16 h-16 object-cover rounded-lg mr-4">
-                    {% else %}
-                        <div class="w-16 h-16 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center rounded-lg mr-4">
-                            <span class="text-2xl">{{ product.category.icon|default:"📦" }}</span>
-                        </div>
-                    {% endif %}
-                    
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-gray-900">{{ product.title }}</h3>
-                        <p class="text-sm text-gray-600">{{ product.category.name }} • {{ product.price|floatformat:"0g" }}FCFA</p>
-                        <p class="text-xs text-gray-500">Créé le {{ product.created_at|date:"d M Y" }}</p>
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mr-6 shadow-lg">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold text-black mb-2">Supprimer le produit</h1>
+                        <p class="text-gray-600 text-lg">Cette action est définitive et irréversible</p>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                <h3 class="font-medium text-red-800 mb-2">⚠️ Attention</h3>
-                <ul class="text-sm text-red-700 space-y-1">
-                    <li>• Ce produit sera définitivement supprimé</li>
-                    <li>• Toutes les images associées seront supprimées</li>
-                    <li>• Cette action ne peut pas être annulée</li>
-                </ul>
-            </div>
-
-            <form method="post">
-                {% csrf_token %}
-                <div class="flex justify-between">
-                    <a href="{% url 'products:my_products' %}" class="btn-secondary">
-                        Annuler
-                    </a>
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
-                        Supprimer définitivement
-                    </button>
+            <div class="p-8">
+                <!-- Aperçu du produit élégant -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-8 border border-gray-200">
+                    <h3 class="text-lg font-semibold text-black mb-4">Produit à supprimer</h3>
+                    <div class="flex items-center">
+                        {% if product.images.first and product.images.first.image %}
+                            <div class="relative overflow-hidden rounded-xl mr-6">
+                                <img src="{{ product.images.first.image.url }}" 
+                                     alt="{{ product.images.first.alt_text|default:product.title }}"
+                                     class="w-20 h-20 object-cover">
+                            </div>
+                        {% else %}
+                            <div class="w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-xl mr-6 shadow-sm">
+                                <span class="text-3xl">{{ product.category.icon|default:"📦" }}</span>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="flex-1">
+                            <h4 class="text-xl font-semibold text-black mb-2">{{ product.title }}</h4>
+                            <div class="flex items-center space-x-4 text-sm text-gray-600 mb-2">
+                                <span class="flex items-center">
+                                    <span class="text-lg mr-2">{{ product.category.icon|default:"📦" }}</span>
+                                    {{ product.category.name }}
+                                </span>
+                                <span class="text-black font-semibold">{{ product.price|floatformat:"0g" }} FCFA</span>
+                                <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-medium">
+                                    {{ product.get_condition_display }}
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-500 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 4h6m-6 4h6m-6 4h6M3 7v2a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z"></path>
+                                </svg>
+                                Créé le {{ product.created_at|date:"d F Y à H:i" }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </form>
+
+                <!-- Zone d'avertissement sophistiquée -->
+                <div class="bg-red-50 border-l-4 border-red-400 rounded-r-xl p-6 mb-8">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-red-800 mb-3">⚠️ Attention - Action irréversible</h3>
+                            <div class="text-red-700 space-y-2">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                                    <span>Ce produit sera définitivement supprimé de la plateforme</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                                    <span>Toutes les images et informations associées seront perdues</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                                    <span>Les conversations liées à ce produit resteront visibles</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                                    <span>Cette action ne peut pas être annulée</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistiques du produit (si applicable) -->
+                {% if product.views_count or product.messages_count %}
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+                        <h3 class="text-lg font-semibold text-blue-900 mb-4">📊 Statistiques du produit</h3>
+                        <div class="grid grid-cols-2 gap-6">
+                            {% if product.views_count %}
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-blue-600">{{ product.views_count|default:0 }}</div>
+                                    <div class="text-sm text-blue-700">Vue{{ product.views_count|pluralize }}</div>
+                                </div>
+                            {% endif %}
+                            {% if product.messages_count %}
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-blue-600">{{ product.messages_count|default:0 }}</div>
+                                    <div class="text-sm text-blue-700">Message{{ product.messages_count|pluralize }}</div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!-- Formulaire de confirmation -->
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    
+                    <!-- Confirmation par case à cocher -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                        <label class="flex items-start cursor-pointer">
+                            <input type="checkbox" 
+                                   name="confirm_deletion" 
+                                   required 
+                                   class="w-5 h-5 text-red-600 border-2 border-gray-300 rounded focus:ring-red-500 focus:ring-2 mt-1 mr-4">
+                            <div class="flex-1">
+                                <span class="text-black font-medium">
+                                    Je comprends les conséquences de cette action
+                                </span>
+                                <p class="text-gray-600 text-sm mt-1">
+                                    En cochant cette case, je confirme que je souhaite supprimer définitivement ce produit et que cette action ne peut pas être annulée.
+                                </p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="flex flex-col sm:flex-row justify-between gap-4 pt-6 border-t border-gray-200">
+                        <a href="{% url 'products:my_products' %}" 
+                           class="btn-secondary flex items-center justify-center py-4 px-8 text-lg font-medium">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 7h18"></path>
+                            </svg>
+                            Annuler et retourner
+                        </a>
+                        
+                        <button type="submit" 
+                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center text-lg">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Supprimer définitivement
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Message d'information -->
+                <div class="mt-6 p-4 bg-gray-100 rounded-xl">
+                    <div class="flex items-center text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>
+                            Besoin d'aide ? Contactez notre équipe support si vous avez des questions avant de supprimer votre produit.
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- JavaScript pour la confirmation -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const checkbox = form.querySelector('input[type="checkbox"]');
+    
+    // Désactiver le bouton par défaut
+    submitButton.disabled = true;
+    submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+    
+    // Écouter les changements de la checkbox
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            submitButton.disabled = false;
+            submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    });
+    
+    // Double confirmation avant soumission
+    form.addEventListener('submit', function(e) {
+        if (!confirm('Êtes-vous absolument certain de vouloir supprimer ce produit ? Cette action est irréversible.')) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+
+<style>
+/* Animation pour les effets hover */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.btn-danger:hover {
+    animation: shake 0.5s ease-in-out;
+}
+</style>
 {% endblock %}

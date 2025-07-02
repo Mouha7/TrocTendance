@@ -7,11 +7,11 @@ class MessageForm(forms.ModelForm):
         fields = ['subject', 'content']
         widgets = {
             'subject': forms.TextInput(attrs={
-                'class': 'input-field',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
                 'placeholder': 'Sujet de votre message'
             }),
             'content': forms.Textarea(attrs={
-                'class': 'input-field',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white resize-vertical',
                 'rows': 5,
                 'placeholder': 'Écrivez votre message ici...'
             })
@@ -28,7 +28,7 @@ class QuickMessageForm(forms.ModelForm):
         fields = ['content']
         widgets = {
             'content': forms.Textarea(attrs={
-                'class': 'input-field',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white resize-vertical',
                 'rows': 3,
                 'placeholder': 'Tapez votre réponse...'
             })
@@ -44,21 +44,21 @@ class CheckoutForm(forms.ModelForm):
         fields = ['delivery_method', 'delivery_address', 'pickup_location', 'buyer_notes']
         widgets = {
             'delivery_method': forms.Select(attrs={
-                'class': 'input-field',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white appearance-none',
                 'id': 'delivery-method'
             }),
             'delivery_address': forms.Textarea(attrs={
-                'class': 'input-field',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white resize-vertical',
                 'rows': 3,
                 'placeholder': 'Votre adresse complète de livraison'
             }),
             'pickup_location': forms.Textarea(attrs={
-                'class': 'input-field',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white resize-vertical',
                 'rows': 3,
                 'placeholder': 'Lieu de rendez-vous souhaité'
             }),
             'buyer_notes': forms.Textarea(attrs={
-                'class': 'input-field',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white resize-vertical',
                 'rows': 3,
                 'placeholder': 'Questions ou instructions particulières...'
             })
@@ -81,7 +81,7 @@ class PaymentSimulationForm(forms.Form):
     payment_method = forms.ChoiceField(
         choices=PAYMENT_CHOICES,
         widget=forms.RadioSelect(attrs={
-            'class': 'payment-radio'
+            'class': 'w-4 h-4 text-black bg-gray-100 border-gray-300 focus:ring-black focus:ring-2'
         }),
         label="Mode de paiement",
         initial='success'
@@ -92,7 +92,7 @@ class PaymentSimulationForm(forms.Form):
         max_length=19,
         required=False,
         widget=forms.TextInput(attrs={
-            'class': 'input-field',
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
             'placeholder': '1234 5678 9012 3456',
             'pattern': r'[0-9\s]{13,19}',
             'id': 'card-number'
@@ -104,7 +104,7 @@ class PaymentSimulationForm(forms.Form):
         max_length=5,
         required=False,
         widget=forms.TextInput(attrs={
-            'class': 'input-field',
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
             'placeholder': 'MM/AA',
             'pattern': '[0-9]{2}/[0-9]{2}',
             'id': 'card-expiry'
@@ -116,7 +116,7 @@ class PaymentSimulationForm(forms.Form):
         max_length=4,
         required=False,
         widget=forms.TextInput(attrs={
-            'class': 'input-field',
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
             'placeholder': '123',
             'pattern': '[0-9]{3,4}',
             'id': 'card-cvv'
@@ -128,7 +128,7 @@ class PaymentSimulationForm(forms.Form):
         max_length=100,
         required=False,
         widget=forms.TextInput(attrs={
-            'class': 'input-field',
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white',
             'placeholder': 'NOM PRÉNOM',
             'id': 'card-name'
         }),
@@ -139,7 +139,7 @@ class PaymentSimulationForm(forms.Form):
         required=True,
         label="J'accepte les conditions générales de vente",
         widget=forms.CheckboxInput(attrs={
-            'class': 'form-checkbox'
+            'class': 'w-4 h-4 text-black bg-gray-100 border-gray-300 focus:ring-black focus:ring-2 rounded'
         })
     )
     
@@ -184,7 +184,16 @@ class ReviewForm(forms.ModelForm):
             'comment': "Votre avis",
         }
         widgets = {
-            'rating': forms.RadioSelect(choices=[(i, f"{i} ⭐") for i in range(1, 6)]),
-            'comment': forms.Textarea(attrs={'rows': 3, 'placeholder': "Votre commentaire...", 'class': 'input-field'}),
+            'rating': forms.RadioSelect(
+                choices=[(i, f"{i} ⭐") for i in range(1, 6)],
+                attrs={
+                    'class': 'w-4 h-4 text-black bg-gray-100 border-gray-300 focus:ring-black focus:ring-2'
+                }
+            ),
+            'comment': forms.Textarea(attrs={
+                'rows': 3, 
+                'placeholder': "Votre commentaire...", 
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white resize-vertical'
+            }),
         }
 

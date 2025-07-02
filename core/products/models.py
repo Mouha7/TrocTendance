@@ -62,6 +62,17 @@ class Product(models.Model):
         blank=True, 
         verbose_name="Taille"
     )
+    OPERATION_CHOICES = [
+        ('sale', 'Vente'),
+        ('exchange', 'Échange'),
+        ('both', 'Vente ou échange'),
+    ]
+    operation = models.CharField(
+        max_length=10,
+        choices=OPERATION_CHOICES,
+        default='sale',
+        verbose_name="Type d'opération"
+    )
     seller = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Vendeur")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Créé le")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Modifié le")

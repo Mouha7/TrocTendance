@@ -4,173 +4,242 @@
 {% block title %}Mes annonces - TrocTendance{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-flame-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- En-tête -->
-        <div class="flex justify-between items-center mb-8">
+<div class="min-h-screen bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- En-tête élégant -->
+        <div class="flex justify-between items-center mb-12">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Mes annonces</h1>
-                <p class="mt-2 text-gray-600">Gérez vos produits en vente</p>
+                <h1 class="text-4xl font-bold text-black mb-2">Mes annonces</h1>
+                <p class="text-lg text-gray-600">Gérez votre collection avec élégance</p>
             </div>
-            <a href="{% url 'products:create' %}" class="btn-primary">
-                ➕ Ajouter un produit
+            <a href="{% url 'products:create' %}" class="btn-primary text-lg px-8 py-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Nouvelle annonce
             </a>
         </div>
 
-        <!-- Statistiques -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <div class="bg-white rounded-lg shadow p-6">
+        <!-- Statistiques élégantes -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-8 h-8 bg-flame-500 rounded-full flex items-center justify-center">
-                            <span class="text-white font-bold">{{ stats.total }}</span>
+                        <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-500">Total</p>
-                        <p class="text-lg font-bold text-gray-900">{{ stats.total }} produit{{ stats.total|pluralize }}</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Total</p>
+                        <p class="text-2xl font-bold text-black">{{ stats.total }}</p>
+                        <p class="text-xs text-gray-500">article{{ stats.total|pluralize }}</p>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                            <span class="text-white font-bold">{{ stats.available }}</span>
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-500">Disponibles</p>
-                        <p class="text-lg font-bold text-gray-900">{{ stats.available }}</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Disponibles</p>
+                        <p class="text-2xl font-bold text-green-600">{{ stats.available }}</p>
+                        <p class="text-xs text-gray-500">en ligne</p>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                            <span class="text-white font-bold">{{ stats.reserved }}</span>
+                        <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-500">Réservés</p>
-                        <p class="text-lg font-bold text-gray-900">{{ stats.reserved }}</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Réservés</p>
+                        <p class="text-2xl font-bold text-amber-500">{{ stats.reserved }}</p>
+                        <p class="text-xs text-gray-500">en attente</p>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                            <span class="text-white font-bold">{{ stats.sold }}</span>
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-500">Vendus</p>
-                        <p class="text-lg font-bold text-gray-900">{{ stats.sold }}</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Vendus</p>
+                        <p class="text-2xl font-bold text-blue-600">{{ stats.sold }}</p>
+                        <p class="text-xs text-gray-500">finalisés</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Filtres -->
-        <div class="bg-white rounded-lg shadow p-6 mb-8">
-            <form method="GET" class="flex flex-col md:flex-row gap-4">
-                <div class="flex-1">
-                    <input type="text" 
-                            name="search" 
-                            value="{{ search_query }}" 
-                            placeholder="Rechercher dans mes annonces..."
-                            class="input-field">
+        <!-- Filtres sophistiqués -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-100">
+            <form method="GET" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Recherche -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Recherche</label>
+                        <div class="relative">
+                            <input type="text" 
+                                   name="search" 
+                                   value="{{ search_query }}" 
+                                   placeholder="Rechercher dans mes annonces..."
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtre statut -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Statut</label>
+                        <select name="status" class="w-full py-3 px-4 border border-gray-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300">
+                            {% for value, label in status_choices %}
+                                <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 
-                <div class="md:w-48">
-                    <select name="status" class="input-field">
-                        {% for value, label in status_choices %}
-                            <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>
-                                {{ label }}
-                            </option>
-                        {% endfor %}
-                    </select>
+                <div class="flex justify-end">
+                    <button type="submit" class="btn-primary px-8 py-3 flex items-center justify-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z"></path>
+                        </svg>
+                        Filtrer
+                    </button>
                 </div>
-                
-                <button type="submit" class="btn-primary whitespace-nowrap">
-                    Filtrer
-                </button>
             </form>
         </div>
 
         <!-- Liste des produits -->
         {% if products %}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for product in products %}
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
                         <!-- Image -->
-                        <div class="relative">
+                        <div class="relative h-64 overflow-hidden">
                             {% if product.images.first and product.images.first.image %}
                                 <img src="{{ product.images.first.image.url }}" 
                                     alt="{{ product.images.first.alt_text|default:product.title }}"
-                                    class="w-full h-48 object-cover">
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                             {% else %}
-                                <div class="w-full h-48 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center">
+                                <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                                     <div class="text-center">
-                                        <span class="text-4xl mb-2 block">{{ product.category.icon|default:"📦" }}</span>
-                                        <span class="text-flame-600 text-sm font-medium">{{ product.category.name }}</span>
+                                        <div class="text-5xl text-gray-400 mb-2">{{ product.category.icon|default:"📦" }}</div>
+                                        <span class="text-gray-600 text-sm font-medium">{{ product.category.name }}</span>
                                     </div>
                                 </div>
                             {% endif %}
                             
-                            <!-- Badge de statut -->
-                            <div class="absolute top-2 right-2">
-                                <span class="px-2 py-1 text-xs font-medium rounded-full
-                                    {% if product.status == 'available' %}bg-green-100 text-green-800
-                                    {% elif product.status == 'reserved' %}bg-orange-100 text-orange-800
-                                    {% elif product.status == 'sold' %}bg-blue-100 text-blue-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">
+                            <!-- Badges sophistiqués -->
+                            <div class="absolute top-3 left-3">
+                                <span class="px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm
+                                    {% if product.status == 'available' %}bg-green-100/90 text-green-800
+                                    {% elif product.status == 'reserved' %}bg-amber-100/90 text-amber-800
+                                    {% elif product.status == 'sold' %}bg-blue-100/90 text-blue-800
+                                    {% else %}bg-gray-100/90 text-gray-800{% endif %}">
                                     {{ product.get_status_display }}
                                 </span>
                             </div>
+
+                            <!-- Badge opération -->
+                            {% if product.operation %}
+                                <div class="absolute top-3 right-3">
+                                    {% if product.operation == 'sale' %}
+                                        <span class="px-2 py-1 text-xs font-medium bg-green-100/90 text-green-800 rounded-full backdrop-blur-sm">
+                                            💰 Vente
+                                        </span>
+                                    {% elif product.operation == 'exchange' %}
+                                        <span class="px-2 py-1 text-xs font-medium bg-blue-100/90 text-blue-800 rounded-full backdrop-blur-sm">
+                                            🔄 Échange
+                                        </span>
+                                    {% else %}
+                                        <span class="px-2 py-1 text-xs font-medium bg-purple-100/90 text-purple-800 rounded-full backdrop-blur-sm">
+                                            ⚡ Mixte
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                         </div>
                         
                         <!-- Contenu -->
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">
-                                    <a href="{% url 'products:detail' product.pk %}" class="hover:text-flame-600">
+                        <div class="p-6">
+                            <!-- En-tête -->
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-lg font-semibold text-black line-clamp-2 flex-1 mr-3">
+                                    <a href="{% url 'products:detail' product.pk %}" class="hover:text-gray-600 transition-colors duration-300">
                                         {{ product.title }}
                                     </a>
                                 </h3>
-                                <span class="text-xl font-bold text-flame-600 ml-2">
-                                    {{ product.price|floatformat:"0g" }}FCFA
+                                <span class="text-xl font-bold text-black whitespace-nowrap">
+                                    {{ product.price|floatformat:"0g" }} <span class="text-sm text-gray-500">FCFA</span>
                                 </span>
                             </div>
                             
-                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">
-                                {{ product.description|truncatewords:15 }}
+                            <!-- Description -->
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                                {{ product.description|truncatewords:12 }}
                             </p>
                             
-                            <!-- Informations -->
-                            <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
-                                <span>{{ product.category.icon }} {{ product.category.name }}</span>
-                                <span>{{ product.created_at|date:"d M Y" }}</span>
+                            <!-- Métadonnées -->
+                            <div class="flex items-center justify-between text-sm text-gray-500 mb-6 pb-4 border-b border-gray-100">
+                                <div class="flex items-center">
+                                    <span class="text-lg mr-2">{{ product.category.icon|default:"📦" }}</span>
+                                    <span>{{ product.category.name }}</span>
+                                </div>
+                                <span class="font-medium">{{ product.created_at|date:"d M Y" }}</span>
                             </div>
                             
-                            <!-- Actions -->
-                            <div class="flex space-x-2">
+                            <!-- Actions élégantes -->
+                            <div class="grid grid-cols-3 gap-2">
                                 <a href="{% url 'products:detail' product.pk %}" 
-                                    class="flex-1 text-center py-2 px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                    👁️ Voir
+                                   class="flex items-center justify-center py-2 px-3 text-sm font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-300 group">
+                                    <svg class="w-4 h-4 mr-1 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    Voir
                                 </a>
+                                
                                 <a href="{% url 'products:update' product.pk %}" 
-                                    class="flex-1 text-center py-2 px-3 bg-flame-600 text-white rounded-md text-sm font-medium hover:bg-flame-700">
-                                    ✏️ Modifier
+                                   class="flex items-center justify-center py-2 px-3 text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-300 group">
+                                    <svg class="w-4 h-4 mr-1 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                    </svg>
+                                    Modifier
                                 </a>
+                                
                                 <a href="{% url 'products:delete' product.pk %}" 
-                                    class="py-2 px-3 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700">
-                                    🗑️
+                                   class="flex items-center justify-center py-2 px-3 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors duration-300 group"
+                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?')">
+                                    <svg class="w-4 h-4 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -178,25 +247,28 @@
                 {% endfor %}
             </div>
 
-            <!-- Pagination -->
+            <!-- Pagination élégante -->
             {% if page_obj.has_other_pages %}
-                <div class="mt-8 flex justify-center">
-                    <nav class="flex space-x-2">
+                <div class="mt-16 flex justify-center">
+                    <nav class="flex items-center space-x-2" aria-label="Pagination">
                         {% if page_obj.has_previous %}
                             <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if status_filter %}status={{ status_filter }}&{% endif %}page={{ page_obj.previous_page_number }}" 
-                                class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                               class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
                                 Précédent
                             </a>
                         {% endif %}
                         
                         {% for num in page_obj.paginator.page_range %}
                             {% if page_obj.number == num %}
-                                <span class="px-3 py-2 text-sm font-medium text-white bg-flame-600 border border-flame-600 rounded-md">
+                                <span class="px-4 py-2 text-sm font-bold text-white bg-black rounded-lg shadow-lg">
                                     {{ num }}
                                 </span>
                             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                                 <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if status_filter %}status={{ status_filter }}&{% endif %}page={{ num }}" 
-                                    class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                                   class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
                                     {{ num }}
                                 </a>
                             {% endif %}
@@ -204,30 +276,54 @@
                         
                         {% if page_obj.has_next %}
                             <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if status_filter %}status={{ status_filter }}&{% endif %}page={{ page_obj.next_page_number }}" 
-                                class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                               class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
                                 Suivant
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </a>
                         {% endif %}
                     </nav>
                 </div>
             {% endif %}
         {% else %}
-            <!-- État vide -->
-            <div class="text-center py-12">
-                <div class="text-6xl mb-4">📦</div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucune annonce trouvée</h3>
-                <p class="text-gray-600 mb-6">
+            <!-- État vide élégant -->
+            <div class="text-center py-20">
+                <div class="text-8xl mb-6 opacity-20">📦</div>
+                <h3 class="text-2xl font-bold text-black mb-4">Aucune annonce trouvée</h3>
+                <p class="text-gray-600 mb-8 max-w-md mx-auto leading-relaxed">
                     {% if search_query or status_filter != 'all' %}
-                        Aucun produit ne correspond à vos critères de recherche.
+                        Aucun produit ne correspond à vos critères de recherche. Modifiez vos filtres pour voir plus d'annonces.
                     {% else %}
-                        Vous n'avez pas encore créé d'annonce.
+                        Commencez à vendre vos articles et créez votre première annonce dès maintenant.
                     {% endif %}
                 </p>
-                <a href="{% url 'products:create' %}" class="btn-primary">
-                    Créer ma première annonce
-                </a>
+                <div class="space-y-4">
+                    <a href="{% url 'products:create' %}" class="btn-primary text-lg px-8 py-4 inline-block">
+                        <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Créer ma première annonce
+                    </a>
+                    {% if search_query or status_filter != 'all' %}
+                        <div>
+                            <a href="{% url 'products:my_products' %}" class="btn-secondary text-lg px-8 py-4 inline-block">
+                                Voir toutes mes annonces
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
     </div>
 </div>
+
+<style>
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
 {% endblock %}

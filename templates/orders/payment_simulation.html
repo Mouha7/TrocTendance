@@ -4,235 +4,497 @@
 {% block title %}Paiement sécurisé - TrocTendance{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-flame-50 py-8">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- En-tête -->
-        <div class="mb-8 text-center">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Paiement sécurisé</h1>
-            <div class="flex items-center justify-center space-x-2">
-                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb élégant -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-2 text-sm">
+                <li class="inline-flex items-center">
+                    <a href="{% url 'orders:checkout' product.pk %}" class="text-gray-500 hover:text-black transition-colors duration-300">
+                        Commande
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-gray-700 font-medium">Paiement sécurisé</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- En-tête avec progression -->
+        <div class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-black mb-4">Paiement sécurisé</h1>
+            <p class="text-lg text-gray-600 mb-8">Finalisez votre achat en toute sécurité</p>
+            
+            <!-- Indicateur de progression -->
+            <div class="max-w-md mx-auto">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="ml-2 text-sm font-medium text-green-600">Informations</span>
+                    </div>
+                    <div class="flex-1 h-0.5 bg-green-200 mx-4"></div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white text-sm font-medium">2</div>
+                        <span class="ml-2 text-sm font-medium text-black">Paiement</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Badge de sécurité -->
+            <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-4 py-2">
+                <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="text-green-700 font-medium">Connexion SSL sécurisée</span>
+                <span class="text-green-700 font-medium">Connexion SSL 256-bit sécurisée</span>
             </div>
         </div>
 
-        <!-- Messages -->
+        <!-- Messages élégants -->
         {% if messages %}
-            <div class="mb-6">
+            <div class="mb-8">
                 {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} bg-{% if message.tags == 'error' %}red{% elif message.tags == 'success' %}green{% else %}blue{% endif %}-50 border border-{% if message.tags == 'error' %}red{% elif message.tags == 'success' %}green{% else %}blue{% endif %}-200 text-{% if message.tags == 'error' %}red{% elif message.tags == 'success' %}green{% else %}blue{% endif %}-800 px-4 py-3 rounded-lg">
-                        {{ message }}
+                    <div class="{% if message.tags == 'error' %}bg-red-50 border-l-4 border-red-400{% elif message.tags == 'success' %}bg-green-50 border-l-4 border-green-400{% else %}bg-blue-50 border-l-4 border-blue-400{% endif %} rounded-r-xl p-6 shadow-md">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 {% if message.tags == 'error' %}text-red-600{% elif message.tags == 'success' %}text-green-600{% else %}text-blue-600{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    {% if message.tags == 'error' %}
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                    {% elif message.tags == 'success' %}
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    {% else %}
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    {% endif %}
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <p class="{% if message.tags == 'error' %}text-red-800{% elif message.tags == 'success' %}text-green-800{% else %}text-blue-800{% endif %} font-medium">{{ message }}</p>
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
         {% endif %}
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
             <!-- Formulaire de paiement -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-xl font-semibold text-gray-900 mb-6">Informations de paiement</h2>
-                
-                <form method="post" class="space-y-6" id="payment-form">
-                    {% csrf_token %}
-                    
-                    <!-- Erreurs générales du formulaire -->
-                    {% if form.non_field_errors %}
-                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-                            {% for error in form.non_field_errors %}
-                                <p class="text-red-800">{{ error }}</p>
-                            {% endfor %}
+            <div class="xl:col-span-2">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                    <!-- En-tête du formulaire -->
+                    <div class="bg-gradient-to-r from-gray-50 to-white p-8 border-b border-gray-100">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 shadow-lg">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-black mb-1">Informations de paiement</h2>
+                                <p class="text-gray-600">Choisissez votre mode de paiement préféré</p>
+                            </div>
                         </div>
-                    {% endif %}
+                    </div>
                     
-                    <!-- Mode de paiement -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-4">
-                            {{ form.payment_method.label }}
-                        </label>
-                        <div class="space-y-3">
-                            {% for choice in form.payment_method %}
-                                <div class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer payment-option" data-method="{{ choice.data.value }}">
-                                    {{ choice.tag }}
-                                    <label for="{{ choice.id_for_label }}" class="ml-3 flex-1 cursor-pointer font-medium">
-                                        {{ choice.choice_label }}
-                                    </label>
-                                    {% if choice.data.value == 'success' %}
-                                        <div class="flex space-x-1">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" class="h-6">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-6">
+                    <!-- Contenu du formulaire -->
+                    <div class="p-8">
+                        <form method="post" class="space-y-8" id="payment-form">
+                            {% csrf_token %}
+                            
+                            <!-- Erreurs générales du formulaire -->
+                            {% if form.non_field_errors %}
+                                <div class="bg-red-50 border-l-4 border-red-400 rounded-r-xl p-4">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0">
+                                            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
                                         </div>
-                                    {% elif choice.data.value == 'failure' %}
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-6">
+                                        <div class="ml-3">
+                                            <h3 class="text-red-800 font-medium mb-2">Erreurs de validation</h3>
+                                            <div class="text-red-700 space-y-1">
+                                                {% for error in form.non_field_errors %}
+                                                    <div class="flex items-center">
+                                                        <div class="w-1.5 h-1.5 bg-red-500 rounded-full mr-2"></div>
+                                                        <span>{{ error }}</span>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Mode de paiement sophistiqué -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-4">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                        {{ form.payment_method.label }}
+                                    </div>
+                                </label>
+                                
+                                <div class="space-y-3">
+                                    {% for choice in form.payment_method %}
+                                        <label class="relative cursor-pointer">
+                                            <input type="radio" name="{{ form.payment_method.name }}" value="{{ choice.data.value }}" class="sr-only peer" {% if choice.data.value == 'success' %}checked{% endif %}>
+                                            <div class="p-6 border-2 border-gray-200 rounded-xl peer-checked:border-black peer-checked:bg-gray-50 transition-all duration-300 hover:border-gray-300 payment-option mb-6" data-method="{{ choice.data.value }}">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex items-center">
+                                                        <div class="w-10 h-10 {% if choice.data.value == 'success' %}bg-blue-100{% elif choice.data.value == 'failure' %}bg-indigo-100{% else %}bg-yellow-100{% endif %} rounded-full flex items-center justify-center mr-4">
+                                                            {% if choice.data.value == 'success' %}
+                                                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                                                </svg>
+                                                            {% elif choice.data.value == 'failure' %}
+                                                                <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                                                </svg>
+                                                            {% else %}
+                                                                <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                                                </svg>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div>
+                                                            <h3 class="font-semibold text-black mb-1">{{ choice.choice_label }}</h3>
+                                                            {% if choice.data.value == 'success' %}
+                                                                <p class="text-sm text-gray-600">Paiement immédiat et sécurisé</p>
+                                                            {% elif choice.data.value == 'failure' %}
+                                                                <p class="text-sm text-gray-600">Service de paiement en ligne</p>
+                                                            {% else %}
+                                                                <p class="text-sm text-gray-600">Virement bancaire différé</p>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="flex items-center space-x-2">
+                                                        {% if choice.data.value == 'success' %}
+                                                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" class="h-6 object-contain">
+                                                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-6 object-contain">
+                                                        {% elif choice.data.value == 'failure' %}
+                                                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-6 object-contain">
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <!-- Champs de carte bancaire élégants -->
+                            <div id="card-fields" class="bg-blue-50 border border-blue-200 rounded-xl p-6 space-y-6">
+                                <div class="flex items-center mb-4">
+                                    <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                    </svg>
+                                    <h4 class="text-lg font-semibold text-blue-900">Informations de carte</h4>
+                                </div>
+                                
+                                <div>
+                                    <label for="{{ form.card_number.id_for_label }}" class="block text-sm font-medium text-blue-900 mb-2">
+                                        {{ form.card_number.label }} *
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" 
+                                               name="{{ form.card_number.name }}" 
+                                               id="{{ form.card_number.id_for_label }}"
+                                               class="w-full pl-12 pr-4 py-3 border border-blue-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white"
+                                               placeholder="1234 5678 9012 3456"
+                                               value="{{ form.card_number.value|default:'' }}">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                                            <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    {% if form.card_number.errors %}
+                                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            {{ form.card_number.errors.0 }}
+                                        </p>
                                     {% endif %}
                                 </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    
-                    <!-- Champs de carte bancaire -->
-                    <div id="card-fields" class="space-y-4">
-                        <div class="grid grid-cols-1 gap-4">
-                            <div>
-                                <label for="{{ form.card_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                    {{ form.card_number.label }} *
-                                </label>
-                                {{ form.card_number }}
-                                {% if form.card_number.errors %}
-                                    <p class="mt-1 text-sm text-red-600">{{ form.card_number.errors.0 }}</p>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="{{ form.card_expiry.id_for_label }}" class="block text-sm font-medium text-blue-900 mb-2">
+                                            {{ form.card_expiry.label }} *
+                                        </label>
+                                        <input type="text" 
+                                               name="{{ form.card_expiry.name }}" 
+                                               id="{{ form.card_expiry.id_for_label }}"
+                                               class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white"
+                                               placeholder="MM/AA"
+                                               value="{{ form.card_expiry.value|default:'' }}">
+                                        {% if form.card_expiry.errors %}
+                                            <p class="mt-2 text-sm text-red-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                {{ form.card_expiry.errors.0 }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <label for="{{ form.card_cvv.id_for_label }}" class="block text-sm font-medium text-blue-900 mb-2">
+                                            {{ form.card_cvv.label }} *
+                                        </label>
+                                        <input type="text" 
+                                               name="{{ form.card_cvv.name }}" 
+                                               id="{{ form.card_cvv.id_for_label }}"
+                                               class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white"
+                                               placeholder="123"
+                                               value="{{ form.card_cvv.value|default:'' }}">
+                                        {% if form.card_cvv.errors %}
+                                            <p class="mt-2 text-sm text-red-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                {{ form.card_cvv.errors.0 }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="{{ form.card_name.id_for_label }}" class="block text-sm font-medium text-blue-900 mb-2">
+                                        {{ form.card_name.label }} *
+                                    </label>
+                                    <input type="text" 
+                                           name="{{ form.card_name.name }}" 
+                                           id="{{ form.card_name.id_for_label }}"
+                                           class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:border-black focus:ring-0 transition-colors duration-300 text-black bg-white"
+                                           placeholder="NOM PRÉNOM"
+                                           value="{{ form.card_name.value|default:'' }}">
+                                    {% if form.card_name.errors %}
+                                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            {{ form.card_name.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- PayPal fields (masqués) -->
+                            <div id="paypal-fields" class="hidden bg-indigo-50 border border-indigo-200 rounded-xl p-6">
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-indigo-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="text-indigo-800 font-medium mb-2">Redirection vers PayPal</p>
+                                        <p class="text-sm text-indigo-700 leading-relaxed">
+                                            Vous serez redirigé vers PayPal pour finaliser votre paiement en toute sécurité.
+                                        </p>
+                                        <p class="text-xs text-indigo-600 mt-3 bg-indigo-100 rounded-lg p-2">
+                                            ⚠️ <strong>Note de démonstration :</strong> Cette option simule un échec de paiement pour tester la gestion d'erreurs.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Virement fields (masqués) -->
+                            <div id="bank-fields" class="hidden bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-yellow-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="text-yellow-800 font-medium mb-2">Instructions de virement</p>
+                                        <p class="text-sm text-yellow-700 leading-relaxed">
+                                            Les détails du virement bancaire vous seront envoyés par email après validation de votre commande.
+                                        </p>
+                                        <p class="text-xs text-yellow-600 mt-3 bg-yellow-100 rounded-lg p-2">
+                                            ⚠️ <strong>Note de démonstration :</strong> Cette option simule une erreur technique pour tester la robustesse du système.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Conditions générales -->
+                            <div class="border-t border-gray-200 pt-6">
+                                <div class="flex items-start">
+                                    <input type="checkbox" 
+                                           name="{{ form.accept_terms.name }}" 
+                                           id="{{ form.accept_terms.id_for_label }}"
+                                           class="mt-1 h-4 w-4 text-black border-gray-300 rounded focus:ring-black"
+                                           required>
+                                    <label for="{{ form.accept_terms.id_for_label }}" class="ml-3 text-sm text-gray-700 leading-relaxed">
+                                        {{ form.accept_terms.label }}
+                                    </label>
+                                </div>
+                                {% if form.accept_terms.errors %}
+                                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        {{ form.accept_terms.errors.0 }}
+                                    </p>
                                 {% endif %}
                             </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="{{ form.card_expiry.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                    {{ form.card_expiry.label }} *
-                                </label>
-                                {{ form.card_expiry }}
-                                {% if form.card_expiry.errors %}
-                                    <p class="mt-1 text-sm text-red-600">{{ form.card_expiry.errors.0 }}</p>
-                                {% endif %}
+                            
+                            <!-- Boutons d'action -->
+                            <div class="flex flex-col sm:flex-row justify-between gap-4 pt-6 border-t border-gray-200">
+                                <a href="{% url 'orders:checkout' product.id %}" 
+                                   class="btn-secondary flex items-center justify-center py-3 px-6 text-lg font-medium">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 7h18"></path>
+                                    </svg>
+                                    Retour
+                                </a>
+                                <button type="submit" 
+                                        class="btn-primary flex items-center justify-center py-3 px-8 text-lg font-medium">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                    Payer {{ checkout_data.total_price|floatformat:"0g" }} FCFA
+                                </button>
                             </div>
-                            <div>
-                                <label for="{{ form.card_cvv.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                    {{ form.card_cvv.label }} *
-                                </label>
-                                {{ form.card_cvv }}
-                                {% if form.card_cvv.errors %}
-                                    <p class="mt-1 text-sm text-red-600">{{ form.card_cvv.errors.0 }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label for="{{ form.card_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                {{ form.card_name.label }} *
-                            </label>
-                            {{ form.card_name }}
-                            {% if form.card_name.errors %}
-                                <p class="mt-1 text-sm text-red-600">{{ form.card_name.errors.0 }}</p>
-                            {% endif %}
-                        </div>
+                        </form>
                     </div>
-                    
-                    <!-- PayPal fields (masqués) -->
-                    <div id="paypal-fields" class="hidden">
-                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <p class="text-blue-800 font-medium">Vous serez redirigé vers PayPal pour finaliser votre paiement</p>
-                            <p class="text-sm text-blue-600 mt-2">⚠️ Cette option simule un échec de paiement pour la démonstration</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Virement fields (masqués) -->
-                    <div id="bank-fields" class="hidden">
-                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                            <p class="text-yellow-800 font-medium">Les instructions de virement vous seront envoyées par email</p>
-                            <p class="text-sm text-yellow-600 mt-2">⚠️ Cette option simule une erreur technique pour la démonstration</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Conditions -->
-                    <div class="border-t border-gray-200 pt-6">
-                        <div class="flex items-start">
-                            {{ form.accept_terms }}
-                            <label for="{{ form.accept_terms.id_for_label }}" class="ml-2 text-sm text-gray-600">
-                                {{ form.accept_terms.label }}
-                            </label>
-                        </div>
-                        {% if form.accept_terms.errors %}
-                            <p class="mt-1 text-sm text-red-600">{{ form.accept_terms.errors.0 }}</p>
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Boutons -->
-                    <div class="flex justify-between pt-6">
-                        <a href="{% url 'orders:checkout' product.id %}" class="btn-secondary text-center">
-                            Retour
-                        </a>
-                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold text-lg px-8 py-3 rounded-lg transition-colors duration-200 shadow-lg">
-                            🔒 Payer {{ checkout_data.total_price|floatformat:"0g" }}FCFA
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
 
             <!-- Récapitulatif de commande -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-xl font-semibold text-gray-900 mb-6">Récapitulatif de commande</h2>
-                
-                <!-- Produit -->
-                <div class="flex items-center space-x-4 mb-6 p-4 bg-gray-50 rounded-lg">
-                    {% if product.images.first and product.images.first.image %}
-                        <img src="{{ product.images.first.image.url }}" 
-                             alt="{{ product.title }}"
-                             class="w-16 h-16 object-cover rounded-lg">
-                    {% else %}
-                        <div class="w-16 h-16 bg-gradient-to-br from-flame-100 to-flame-200 flex items-center justify-center rounded-lg">
-                            <span class="text-2xl">{{ product.category.icon|default:"📦" }}</span>
-                        </div>
-                    {% endif %}
+            <div class="xl:col-span-1">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 sticky top-8">
+                    <!-- En-tête du récapitulatif -->
+                    <div class="bg-gradient-to-r from-gray-50 to-white p-6 border-b border-gray-100">
+                        <h3 class="text-xl font-bold text-black flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                            Récapitulatif
+                        </h3>
+                    </div>
                     
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-gray-900">{{ product.title }}</h3>
-                        <p class="text-sm text-gray-600">{{ product.get_condition_display }}</p>
-                        <p class="text-sm text-gray-600">Vendu par {{ product.seller.get_full_name|default:product.seller.username }}</p>
+                    <!-- Contenu du récapitulatif -->
+                    <div class="p-6">
+                        <!-- Produit -->
+                        <div class="mb-6">
+                            <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                                {% if product.images.first and product.images.first.image %}
+                                    <img src="{{ product.images.first.image.url }}" 
+                                         alt="{{ product.title }}"
+                                         class="w-20 h-20 object-cover rounded-lg shadow-md">
+                                {% else %}
+                                    <div class="w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-lg shadow-md">
+                                        <span class="text-2xl">{{ product.category.icon|default:"📦" }}</span>
+                                    </div>
+                                {% endif %}
+                                
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="font-semibold text-black mb-1 line-clamp-2">{{ product.title }}</h4>
+                                    <p class="text-sm text-gray-600 mb-1">{{ product.get_condition_display }}</p>
+                                    <p class="text-xs text-gray-500">Vendu par {{ product.seller.get_full_name|default:product.seller.username }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Détail des prix -->
+                        <div class="space-y-4 pt-4 border-t border-gray-200">
+                            <div class="flex justify-between text-gray-600">
+                                <span>Prix du produit</span>
+                                <span class="font-medium">{{ checkout_data.product_price|floatformat:"0g" }} FCFA</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Frais de service TrocTendance</span>
+                                <span class="font-medium">{{ checkout_data.commission|floatformat:"0g" }} FCFA</span>
+                            </div>
+                            <div class="flex justify-between items-center font-bold text-xl text-black pt-4 border-t border-gray-200">
+                                <span>Total</span>
+                                <span class="text-2xl">{{ checkout_data.total_price|floatformat:"0g" }} FCFA</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sécurité -->
+                        <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+                            <div class="flex items-center mb-3">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="font-medium text-green-800">Protection des achats TrocTendance</span>
+                            </div>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li class="flex items-center">
+                                    <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
+                                    Paiement 100% sécurisé
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
+                                    Protection contre la fraude
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
+                                    Garantie de remboursement
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Garanties supplémentaires -->
+                        <div class="mt-4 space-y-2">
+                            <div class="flex items-center text-xs text-gray-600">
+                                <svg class="w-3 h-3 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Certificat SSL 256-bit
+                            </div>
+                            <div class="flex items-center text-xs text-gray-600">
+                                <svg class="w-3 h-3 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Support client 24/7
+                            </div>
+                            <div class="flex items-center text-xs text-gray-600">
+                                <svg class="w-3 h-3 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Données personnelles protégées
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Détail des prix -->
-                <div class="space-y-3 mb-6">
-                    <div class="flex justify-between text-gray-600">
-                        <span>Prix du produit</span>
-                        <span>{{ checkout_data.product_price|floatformat:"0g" }}FCFA</span>
-                    </div>
-                    <div class="flex justify-between text-gray-600">
-                        <span>Frais de service TrocTendance</span>
-                        <span>{{ checkout_data.commission }}FCFA</span>
-                    </div>
-                    <div class="flex justify-between font-bold text-lg text-gray-900 pt-3 border-t border-gray-200">
-                        <span>Total</span>
-                        <span class="text-green-600">{{ checkout_data.total_price|floatformat:"0g" }}FCFA</span>
-                    </div>
-                </div>
-                
-                <!-- Sécurité -->
-                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <div class="flex items-center mb-3">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="font-medium text-green-800">Protection des achats</span>
-                    </div>
-                    <ul class="text-sm text-green-700 space-y-1">
-                        <li>• Paiement 100% sécurisé</li>
-                        <li>• Protection contre la fraude</li>
-                        <li>• Remboursement garanti</li>
-                    </ul>
                 </div>
             </div>
         </div>
         
         <!-- Informations sécurité en bas -->
-        <div class="mt-8 text-center">
-            <div class="flex items-center justify-center space-x-6 text-sm text-gray-600">
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>SSL 256-bit</span>
-                </div>
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>Données protégées</span>
-                </div>
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>Support client</span>
+        <div class="mt-12 text-center">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                <h4 class="text-lg font-semibold text-black mb-4">Vos données sont protégées</h4>
+                <div class="flex items-center justify-center space-x-8 text-sm text-gray-600">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="font-medium">Chiffrement SSL 256-bit</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="font-medium">Conformité RGPD</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="font-medium">Support dédié</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -248,20 +510,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const bankFields = document.getElementById('bank-fields');
     
     function togglePaymentFields() {
-        const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
+        const selectedMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
         
-        // Masquer tous les champs
-        cardFields.classList.add('hidden');
-        paypalFields.classList.add('hidden');
-        bankFields.classList.add('hidden');
+        // Masquer tous les champs avec animation
+        [cardFields, paypalFields, bankFields].forEach(field => {
+            if (field) {
+                field.style.opacity = '0';
+                field.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    field.classList.add('hidden');
+                }, 200);
+            }
+        });
         
-        // Afficher les champs appropriés
-        if (selectedMethod === 'success') { // Carte bancaire
-            cardFields.classList.remove('hidden');
-        } else if (selectedMethod === 'failure') { // PayPal
-            paypalFields.classList.remove('hidden');
-        } else if (selectedMethod === 'error') { // Virement
-            bankFields.classList.remove('hidden');
+        // Afficher les champs appropriés avec animation
+        let targetField = null;
+        if (selectedMethod === 'success') {
+            targetField = cardFields;
+        } else if (selectedMethod === 'failure') {
+            targetField = paypalFields;
+        } else if (selectedMethod === 'error') {
+            targetField = bankFields;
+        }
+        
+        if (targetField) {
+            setTimeout(() => {
+                targetField.classList.remove('hidden');
+                targetField.style.opacity = '0';
+                targetField.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    targetField.style.transition = 'all 0.3s ease-out';
+                    targetField.style.opacity = '1';
+                    targetField.style.transform = 'translateY(0)';
+                }, 50);
+            }, 200);
         }
     }
     
@@ -304,15 +586,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Limitation du CVV
+    const cardCvv = document.getElementById('card-cvv');
+    if (cardCvv) {
+        cardCvv.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
+        });
+    }
+    
     // Pré-remplir avec des données de test pour la carte bancaire
     if (cardNumber && !cardNumber.value) {
         cardNumber.value = '4242 4242 4242 4242';
     }
-    const cardExpiry2 = document.getElementById('card-expiry');
-    if (cardExpiry2 && !cardExpiry2.value) {
-        cardExpiry2.value = '12/25';
+    if (cardExpiry && !cardExpiry.value) {
+        cardExpiry.value = '12/25';
     }
-    const cardCvv = document.getElementById('card-cvv');
     if (cardCvv && !cardCvv.value) {
         cardCvv.value = '123';
     }
@@ -322,4 +610,48 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<style>
+/* Animation d'entrée */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.xl\:col-span-2, .xl\:col-span-1 {
+    animation: slideInUp 0.6s ease-out;
+}
+
+.xl\:col-span-1 {
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+/* Hover effects pour les options de paiement */
+input[type="radio"]:checked + div {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus states pour les inputs */
+input:focus {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Transitions fluides */
+.payment-option {
+    transition: all 0.3s ease-out;
+}
+
+.payment-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+</style>
 {% endblock %}
