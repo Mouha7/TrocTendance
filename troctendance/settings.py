@@ -19,6 +19,9 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv(BASE_DIR / '.env.production')  # ou simplement load_dotenv() pour .env
+
 # Récupérer les variables d'environnement avec os.environ
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key')
@@ -78,9 +81,6 @@ WSGI_APPLICATION = 'troctendance.wsgi.application'
 # Database - SQLite simple
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Charger les variables d'environnement depuis le fichier .env
-load_dotenv(BASE_DIR / '.env.production')  # ou simplement load_dotenv() pour .env
-
 # Database configuration
 DATABASES = {
     'default': dj_database_url.config(
@@ -123,6 +123,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Ajouter les répertoires de fichiers statiques
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Media files pour les images uploadées
 MEDIA_URL = '/media/'
